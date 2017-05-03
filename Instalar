@@ -31,12 +31,12 @@ mkdir /etc/Crazzydir/senha 2>/dev/null
 mkdir /etc/Crazzydir/limite 2> /dev/null
  
 wget -O https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/Limite
-wget -O https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/Limite
-wget -O https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/Limite
-wget -O https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/Limite
-wget -O https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/Limite
-wget -O https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/Limite
-wget -O https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/Limite
+wget -O https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/AddHost
+wget -O https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/AlterarData
+wget -O https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/Banner
+wget -O https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/Conectados
+wget -O https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/CriarUsuarios
+wget -O https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/DeletarUsuario
 
 
  
