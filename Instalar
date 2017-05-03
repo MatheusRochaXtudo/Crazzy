@@ -29,19 +29,48 @@ clear
 mkdir /etc/Crazzydir 2> /dev/null
 mkdir /etc/Crazzydir/senha 2>/dev/null
 mkdir /etc/Crazzydir/limite 2> /dev/null
- 
-wget -O https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/Limite
-wget -O https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/AddHost
-wget -O https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/AlterarData
-wget -O https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/Banner
-wget -O https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/Conectados
-wget -O https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/CriarUsuarios
-wget -O https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/DeletarUsuario
 
+rm -rf /bin/limite 2>/dev/null
+wget -o /dev/null -0- 
+https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/Limite > /bin/Limite
+chmod +x /bin/limite
+
+rm-rf /bin/AddHost 2>/dev/nul
+wget -o /dev/null -0-
+https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/AddHost > /bin/AddHost
+chmod +x /bin/AddHost
+
+rm -rf /bin/AlterarData 2>/dev/null
+wget -o /dev/null -0- 
+https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/AlterarData > /AlterarData
+chmod +x /bin/AlterarData
+
+rm -rf /bin/Banner 2>/dev/null
+wget -o /dev/null -0- 
+https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/Banner > /bin/Banner
+chmod +x /bin/Banner
+
+rm -rf /bin/Conectados 2>/dev/null
+wget -o /dev/null -0-
+https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/Conectados > /bin/Conectados
+chmod +x /bin/Conectados 
+
+rm -rf /bin/CriarUsuarios 2>/dev/null
+wget -o /dev/null -0-
+https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/CriarUsuuarios > /bin/CriarUsuarios
+chmod +x /bin/CriarUsuarios
+
+rm -rf /bin/Crazzy 2>/dev/null
+wget -o /dev/null -0-
+https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/CrazzyMenu > /bin/Crazzy
+chmod +x /bin/Crazzy
+
+rm-rf /bin/DeletarUsuario 2>/dev/null
+wget -o /dev/null -0-
+https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/DeletarUsuario > /bin/DeletarUsuario
+chmod +x /bin/DeletarUsuario
 
  
-wget -O /bin/Crazzy https://dropbox.com/s/zksoebd954gr9gs/Crazzy.sh
-chmod a+x /bin/Crazzy
  
 clear
  
