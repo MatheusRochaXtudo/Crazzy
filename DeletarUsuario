@@ -1,0 +1,8 @@
+#!/bin/bash
+clear
+ 
+   echo -e "$f Qual o Nome Do Usuario Que Deseja Excluir? $x"
+   read nome
+   userdel --force $nome > /dev/null 2>/dev/null
+   echo -e "\033[0;36m O Usuario $nome Foi Excluido \033[0m"
+ 
