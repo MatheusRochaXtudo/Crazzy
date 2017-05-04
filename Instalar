@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
  
 clear
  
@@ -12,7 +12,7 @@ f="\033[1;36m"
 g="\033[1;41m"
  
  
-echo "\033[1;41;36mOla,  Meu Nome e CrazzyScript, Fui Criado Para Ajudar Voce a Gerenciar Sua Vps, Mas Para Continuarmos, Preciso Saber Se Voce Concorda Que Ao Avançar Com a Instalação Desse Script, O Desenvolvedor Do Mesmo, Nao Se Responsabiliza e Nem Da Suporte A Qualquer Erro Ou Mal Funcionamento De Sua Maquina\033[0m [s/n]:"
+echo -e "\033[1;41;36mOla,  Meu Nome e CrazzyScript, Fui Criado Para Ajudar Voce a Gerenciar Sua Vps, Mas Para Continuarmos, Preciso Saber Se Voce Concorda Que Ao Avançar Com a Instalação Desse Script, O Desenvolvedor Do Mesmo, Nao Se Responsabiliza e Nem Da Suporte A Qualquer Erro Ou Mal Funcionamento De Sua Maquina\033[0m [s/n]:"
 read s
  if [ "$s" = "s" ];then
    clear
@@ -20,9 +20,9 @@ read s
    exit
  fi
  
-echo "\033[1;41;36mEeiii, Antes De Continuar, Quero Falar Que Eu Nao Configuro Sua Vps Logo De Cara, Entao Se Sua Vps e Nova E Voce Nunca Usou Ela No Http Injector Ou Em Outro App De Net Free Ou Ate Mesmo Se Quiser Configurar Novamente e So Escolher A Opcao "1" Do Meu Menu. \033[0m"
+echo -e "\033[1;41;36mEeiii, Antes De Continuar, Quero Falar Que Eu Nao Configuro Sua Vps Logo De Cara, Entao Se Sua Vps e Nova E Voce Nunca Usou Ela No Http Injector Ou Em Outro App De Net Free Ou Ate Mesmo Se Quiser Configurar Novamente e So Escolher A Opcao "1" Do Meu Menu. \033[0m"
 echo
-echo "$f Aperte Enter Para Continuar $x "
+echo -e "$f Aperte Enter Para Continuar $x "
 read segue
 clear
  
@@ -77,8 +77,8 @@ chmod +x /bin/Mudar/Senha
  
 clear
  
-echo "$f Instalação Concluida Com Sucesso!!! $x"
-echo "$f Script Desenvolvido Por $a MatheusR $x"
-echo "$f Para Acessar o Menu, Digite $a Crazzy $x"
+echo -e "$f Instalação Concluida Com Sucesso!!! $x"
+echo -e "$f Script Desenvolvido Por $a MatheusR $x"
+echo -e "$f Para Acessar o Menu, Digite $a Crazzy $x"
  
 exit
