@@ -28,7 +28,7 @@ echo -e "$f Desenvolvido Por: $dono"
 echo -e "$f Data De Criação: $data"
 } 
 
-figlet CRAZZYMENU
+figlet CRAZZY MENU
 echo -e "\033[0;31m------------------------------------------------- $x"
 echo -e "\033[1;36mBem Vindo Ao Menu De Opções Do CrazzyScript,
 Toda Vez Que Quizer Entra No Menu, Digite \033[2;31mCrazzy \033[0m"
