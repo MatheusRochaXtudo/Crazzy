@@ -1,4 +1,5 @@
 #!/bin/bash
+ 
  clear
  
 x="\033[0m"
@@ -24,11 +25,11 @@ echo -e "$f Desenvolvido Por: $dono"
 echo -e "$f Data De Criação: $data"
 } 
  
-echo "\033[0;31m------------------------------------------------- $x"
-echo "\033[1;36mBem Vindo Ao Menu De Opções Do CrazzyScript,
+echo -e "\033[0;31m------------------------------------------------- $x"
+echo -e "\033[1;36mBem Vindo Ao Menu De Opções Do CrazzyScript,
 Toda Vez Que Quizer Entra No Menu, Digite \033[2;31mCrazzy \033[0m"
 echo
-echo "\033[1;31m
+echo -e "\033[1;31m
 [$f 0$a ] $f  Sair Do Menu $a
 [$f 1$a ] \033[1;36m  Configurar Sua Vps \033[1;31m
 [$f 2$a ] \033[1;36m  Criar Usuarios \033[1;31m
@@ -40,9 +41,9 @@ echo "\033[1;31m
 [$f 8$a ] $f  Adicionar Host $a
 [$f 9$a ] $f  Detalhes Do Script $a
 [$f 10$a ] $f Desinstalar o CrazzyScript $x"        
-echo "\033[0;31m------------------------------------------------- $x"
+echo -e "\033[0;31m------------------------------------------------- $x"
 echo   
-echo "$a Escolha Uma Opção"
+echo -e "$a Escolha Uma Opção"
 read -p ":" menu
   
 echo
@@ -73,15 +74,15 @@ www.recargafacil.claro.com.br
  
 ubuntu16 () {
     clear
-    echo "\033[0;36m======================================\033[0m"
-   echo "\033[0;32mCONFIGURANDO SEU SQUID...\033[0m"
+   echo -e "\033[0;36m======================================\033[0m"
+   echo -e "\033[0;32mCONFIGURANDO SEU SQUID...\033[0m"
    sleep 3
-   echo "\033[0;33m      Sucesso...\033[0m"
+   echo -e "\033[0;33m      Sucesso...\033[0m"
    sleep 1 
-   echo "\033[0;32mCONFIGURANDO SUA VPS...\033[0m"
+   echo -e "\033[0;32mCONFIGURANDO SUA VPS...\033[0m"
    sleep 3
-   echo "\033[0;33m      Sucesso...\033[0m"
-   echo "\033[0;36m======================================\033[0m"
+   echo -e "\033[0;33m      Sucesso...\033[0m"
+   echo -e "\033[0;36m======================================\033[0m"
    sleep 2
      
     apt-get update&
@@ -135,14 +136,14 @@ ubuntu16 () {
     service ssh restart
      
     clear
-    echo "\033[0;36m====================================================\033[0m"
-   echo "\033[0;31mDesenvolvedor Do Script:\033[0;36m@MatheusR\033[0m"
-   echo "\033[0;31mSeu Sistema Operacional: $f Ubuntu 16\033[0m"
-   echo "\033[0;31mIp Da Sua VPS:\033[0;36m $ip\033[0m"
-   echo "\033[0;31mSeu Squid Esta Configurado Para Operar Nas Portas:\033[0;36m80, 8080, 3128, 8799\033[0m"
-   echo "\033[0;31mDropbear Nas Portas:\033[0;36m22 e 443\033[0m"
-   echo "\033[0;31mVoce Tambem Pode Usa O Ip\033[0;33m127.0.0.1\033[0;31mComo Ip SSH\033[0m"
-   echo "\033[0;36m=====================================================\033[0m"
+   echo -e "\033[0;36m====================================================\033[0m"
+   echo -e "\033[0;31mDesenvolvedor Do Script:\033[0;36m@MatheusR\033[0m"
+   echo -e "\033[0;31mSeu Sistema Operacional: $f Ubuntu 16\033[0m"
+   echo -e \033[0;31mIp Da Sua VPS:\033[0;36m $ip\033[0m"
+   echo -e "\033[0;31mSeu Squid Esta Configurado Para Operar Nas Portas:\033[0;36m80, 8080, 3128, 8799\033[0m"
+   echo -e "\033[0;31mDropbear Nas Portas:\033[0;36m22 e 443\033[0m"
+   echo -e "\033[0;31mVoce Tambem Pode Usa O Ip\033[0;33m127.0.0.1\033[0;31mComo Ip SSH\033[0m"
+   echo -e "\033[0;36m=====================================================\033[0m"
    sleep 6
    Crazzy
  
@@ -153,15 +154,15 @@ ubuntu16 () {
 ubuntu () {
  
 clear
-echo "\033[0;36m======================================\033[0m"
-   echo "\033[0;32mCONFIGURANDO SEU SQUID...\033[0m"
+echo -e "\033[0;36m======================================\033[0m"
+   echo -e "\033[0;32mCONFIGURANDO SEU SQUID...\033[0m"
    sleep 3
-   echo "\033[0;33m      Sucesso...\033[0m"
+   echo -e "\033[0;33m      Sucesso...\033[0m"
    sleep 1 
-   echo "\033[0;32mCONFIGURANDO SUA VPS...\033[0m"
+   echo -e "\033[0;32mCONFIGURANDO SUA VPS...\033[0m"
    sleep 3
-   echo "\033[0;33m      Sucesso...\033[0m"
-   echo "\033[0;36m======================================\033[0m"
+   echo -e "\033[0;33m      Sucesso...\033[0m"
+   echo -e "\033[0;36m======================================\033[0m"
    sleep 2
      
     apt-get update&
@@ -219,14 +220,14 @@ echo "\033[0;36m======================================\033[0m"
     service ssh restart
      
     clear
-    echo "\033[0;36m====================================================\033[0m"
-   echo "\033[0;31mDesenvolvedor Do Script:\033[0;36m@MatheusR\033[0m"
-   echo "\033[0;31mSeu Sistema Operacional: $f Ubuntu\033[0m"
-   echo "\033[0;31mIp Da Sua VPS:\033[0;36m $ip\033[0m"
-   echo "\033[0;31mSeu Squid Esta Configurado Para Operar Nas Portas:\033[0;36m80, 8080, 3128, 8799\033[0m"
-   echo "\033[0;31mDropbear Nas Portas:\033[0;36m22 e 443\033[0m"
-   echo "\033[0;31mVoce Tambem Pode Usa O Ip\033[0;33m127.0.0.1\033[0;31mComo Ip SSH\033[0m"
-   echo "\033[0;36m=====================================================\033[0m"
+    echo -e "\033[0;36m====================================================\033[0m"
+   echo -e "\033[0;31mDesenvolvedor Do Script:\033[0;36m@MatheusR\033[0m"
+   echo -e "\033[0;31mSeu Sistema Operacional: $f Ubuntu\033[0m"
+   echo -e "\033[0;31mIp Da Sua VPS:\033[0;36m $ip\033[0m"
+   echo -e "\033[0;31mSeu Squid Esta Configurado Para Operar Nas Portas:\033[0;36m80, 8080, 3128, 8799\033[0m"
+   echo -e "\033[0;31mDropbear Nas Portas:\033[0;36m22 e 443\033[0m"
+   echo -e "\033[0;31mVoce Tambem Pode Usa O Ip\033[0;33m127.0.0.1\033[0;31mComo Ip SSH\033[0m"
+   echo -e "\033[0;36m=====================================================\033[0m"
    sleep 6
    Crazzy
  
@@ -235,15 +236,15 @@ echo "\033[0;36m======================================\033[0m"
 debian () {
  
 clear
-echo "\033[0;36m======================================\033[0m"
-   echo "\033[0;32mCONFIGURANDO SEU SQUID...\033[0m"
+echo -e "\033[0;36m======================================\033[0m"
+   echo -e "\033[0;32mCONFIGURANDO SEU SQUID...\033[0m"
    sleep 3
-   echo "\033[0;33m      Sucesso...\033[0m"
+   echo -e "\033[0;33m      Sucesso...\033[0m"
    sleep 1 
-   echo "\033[0;32mCONFIGURANDO SUA VPS...\033[0m"
+   echo -e "\033[0;32mCONFIGURANDO SUA VPS...\033[0m"
    sleep 3
-   echo "\033[0;33m      Sucesso...\033[0m"
-   echo "\033[0;36m======================================\033[0m"
+   echo -e "\033[0;33m      Sucesso...\033[0m"
+   echo -e "\033[0;36m======================================\033[0m"
    sleep 2
      
     apt-get update&
@@ -301,14 +302,14 @@ echo "\033[0;36m======================================\033[0m"
     service ssh restart
      
     clear
-    echo "\033[0;36m====================================================\033[0m"
-   echo "\033[0;31mDesenvolvedor Do Script:\033[0;36m@MatheusR\033[0m"
-   echo "\033[0;31mSeu Sistema Operacional: $f Debian\033[0m"
-   echo "\033[0;31mIp Da Sua VPS:\033[0;36m $ip\033[0m"
-   echo "\033[0;31mSeu Squid Esta Configurado Para Operar Nas Portas:\033[0;36m80, 8080, 3128, 8799\033[0m"
-   echo "\033[0;31mDropbear Nas Portas:\033[0;36m22 e 443\033[0m"
-   echo "\033[0;31mVoce Tambem Pode Usa O Ip\033[0;33m127.0.0.1\033[0;31mComo Ip SSH\033[0m"
-   echo "\033[0;36m=====================================================\033[0m"
+   echo -e "\033[0;36m====================================================\033[0m"
+   echo -e "\033[0;31mDesenvolvedor Do Script:\033[0;36m@MatheusR\033[0m"
+   echo -e "\033[0;31mSeu Sistema Operacional: $f Debian\033[0m"
+   echo -e "\033[0;31mIp Da Sua VPS:\033[0;36m $ip\033[0m"
+   echo -e "\033[0;31mSeu Squid Esta Configurado Para Operar Nas Portas:\033[0;36m80, 8080, 3128, 8799\033[0m"
+   echo -e "\033[0;31mDropbear Nas Portas:\033[0;36m22 e 443\033[0m"
+   echo -e "\033[0;31mVoce Tambem Pode Usa O Ip\033[0;33m127.0.0.1\033[0;31mComo Ip SSH\033[0m"
+   echo -e "\033[0;36m=====================================================\033[0m"
    sleep 6
     Crazzy
 }
@@ -326,7 +327,7 @@ echo "\033[0;36m======================================\033[0m"
     ubuntu
      
     else
-    echo "Sistema não compatível, Voltando Ao Menu..."
+    echo -e "Sistema não compatível, Voltando Ao Menu..."
     sleep 4
     Crazzy
 fi; ;;
@@ -364,12 +365,11 @@ fi; ;;
    Crazzy; ;;
 10)
    rm -rf /bin/Crazzy > /dev/null 2> /dev/null
-   echo "$f Script Desinstalado Com Sucesso $x"
-   echo "$f Caso Queira Instala-lo Novamente, Digite $a instalador $x"
+   echo -e "$f Script Desinstalado Com Sucesso $x"
    sleep 1; ;;
     
 *)
-   echo "$a Opcao Invalida $x"
+   echo -e "$a Opcao Invalida $x"
    sleep 2
    Crazzy; ;;
  
