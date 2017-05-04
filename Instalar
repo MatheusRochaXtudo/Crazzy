@@ -35,7 +35,7 @@ wget -o /dev/null -0-
 https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/Limite > /bin/Limite
 chmod +x /bin/limite
 
-rm-rf /bin/AddHost 2>/dev/nul
+rm -rf /bin/AddHost 2>/dev/nul
 wget -o /dev/null -0-
 https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/AddHost > /bin/AddHost
 chmod +x /bin/AddHost
@@ -65,12 +65,15 @@ wget -o /dev/null -0-
 https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/CrazzyMenu > /bin/Crazzy
 chmod +x /bin/Crazzy
 
-rm-rf /bin/DeletarUsuario 2>/dev/null
+rm -rf /bin/DeletarUsuario 2>/dev/null
 wget -o /dev/null -0-
 https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/DeletarUsuario > /bin/DeletarUsuario
 chmod +x /bin/DeletarUsuario
-
- 
+ 
+rm -rf /bin/MudarSenha 2>/dev/null
+wget  -o /dev/null -0-
+https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/MudarSenha > /bin/MudarSenha
+chmod +x /bin/Mudar/Senha
  
 clear
  
