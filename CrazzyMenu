@@ -9,7 +9,21 @@ d="\033[1;34m"
 e="\033[1;35m"
 f="\033[1;36m"
 g="\033[1;41m"
-
+ 
+detalhes  () {
+clear
+ 
+script="$a CrazzyScript $x"
+dono="$a MatheusR $x"
+versao="$a V1.0 $x"
+data="$a 10/04/2017 $x"
+ 
+echo -e "$f Nome Do Script: $script"
+echo -e "$f Versão: $versao"
+echo -e "$f Desenvolvido Por: $dono"
+echo -e "$f Data De Criação: $data"
+} 
+ 
 echo "\033[0;31m------------------------------------------------- $x"
 echo "\033[1;36mBem Vindo Ao Menu De Opções Do CrazzyScript,
 Toda Vez Que Quizer Entra No Menu, Digite \033[2;31mCrazzy \033[0m"
@@ -25,8 +39,7 @@ echo "\033[1;31m
 [$f 7$a ] \033[1;36m  Banner $a
 [$f 8$a ] $f  Adicionar Host $a
 [$f 9$a ] $f  Detalhes Do Script $a
-[$f 10$a ] $f Atualizar o CrazzyScript $a  
-[$f 11$a ] $f Desinstalar o CrazzyScript $x"        
+[$f 10$a ] $f Desinstalar o CrazzyScript $x"        
 echo "\033[0;31m------------------------------------------------- $x"
 echo   
 echo "$a Escolha Uma Opção"
@@ -318,31 +331,31 @@ echo "\033[0;36m======================================\033[0m"
     Crazzy
 fi; ;;
 2)
-   userd
+   CriarUsuarios
    sleep 4
    Crazzy; ;;
 3)
-   excluir
+   DeletarUsuario
    sleep 4
    Crazzy; ;;
 4)
-   alter
+   MudarSenha
    sleep 4
    Crazzy; ;;
 5)
-   data
+   AlterarData
    sleep 4
    Crazzy; ;;
 6)
-   mon
+   Conectados
    sleep 10
    Crazzy; ;;
 7) 
-   banner
+   Banner
    sleep 3
    Crazzy; ;;
 8)
-   addhost
+   AddHost
    sleep 3
    Crazzy; ;;
 9)
@@ -350,10 +363,6 @@ fi; ;;
    sleep 10
    Crazzy; ;;
 10)
-   wget -O /bin/atualizacao https://www.dropbox.com/s/g2s4ky5ckg366zm/att.sh
-   chmod a+x /bin/atualizacao
-   atualizacao; ;;
-11)
    rm -rf /bin/Crazzy > /dev/null 2> /dev/null
    echo "$f Script Desinstalado Com Sucesso $x"
    echo "$f Caso Queira Instala-lo Novamente, Digite $a instalador $x"
