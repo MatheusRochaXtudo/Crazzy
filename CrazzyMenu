@@ -365,6 +365,13 @@ fi; ;;
    Crazzy; ;;
 10)
    rm -rf /bin/Crazzy > /dev/null 2> /dev/null
+   rm -rf /bin/CriarUsuarios > /dev/null 2> /dev/null
+   rm -rf /bin/DeletarUsuario > /dev/null 2> /dev/null
+   rm -rf /bin/Banner > /dev/null 2> /dev/null
+   rm -rf /bin/AddHost > /dev/null 2> /dev/null
+   rm -rf /bin/Conectados > /dev/null 2> /dev/null
+   rm -rf /bin/AlterarData > /dev/null 2> /dev/null
+   rm -rf /bin/MudarSenha > /dev/null 2> /dev/null
    echo -e "$f Script Desinstalado Com Sucesso $x"
    sleep 1; ;;
     
