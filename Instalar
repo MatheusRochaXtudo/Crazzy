@@ -33,39 +33,39 @@ mkdir /etc/Crazzydir/limite 2> /dev/null
 apt-get install figlet
 
 rm -rf /bin/limite 2>/dev/null
-wget -O https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/Limite 
+wget -O /bin/limite https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/Limite 
 chmod +x /bin/limite
 
 rm -rf /bin/AddHost 2>/dev/nul
-wget -O https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/AddHost
+wget -O /bin/AddHost https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/AddHost
 chmod +x /bin/AddHost
 
 rm -rf /bin/AlterarData 2>/dev/null
-wget -O https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/AlterarData 
+wget -O /bin/AlterarData https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/AlterarData 
 chmod +x /bin/AlterarData
 
 rm -rf /bin/Banner 2>/dev/null
-wget -O https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/Banner 
+wget -O /bin/Banner https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/Banner 
 chmod +x /bin/Banner
 
 rm -rf /bin/Conectados 2>/dev/null
-wget -O https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/Conectados 
+wget -O /bin/Conectados https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/Conectados 
 chmod +x /bin/Conectados 
 
 rm -rf /bin/CriarUsuarios 2>/dev/null
-wget -O https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/CriarUsuuarios 
+wget -O /bin/CriarUsuarios https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/CriarUsuuarios 
 chmod +x /bin/CriarUsuarios
 
 rm -rf /bin/Crazzy 2>/dev/null
-wget -O https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/CrazzyMenu 
+wget -O /bin/Crazzy https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/CrazzyMenu 
 chmod +x /bin/Crazzy
 
 rm -rf /bin/DeletarUsuario 2>/dev/null
-wget -O https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/DeletarUsuario 
+wget -O /bin/DeletarUsuario https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/DeletarUsuario 
 chmod +x /bin/DeletarUsuario
  
 rm -rf /bin/MudarSenha 2>/dev/null
-wget  -O https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/MudarSenha 
+wget  -O /bin/MudarSenha https://raw.githubusercontent.com/MatheusRochaXtudo/Crazzy/master/MudarSenha 
 chmod +x /bin/Mudar/Senha
  
 clear
