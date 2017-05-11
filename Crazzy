@@ -67,7 +67,7 @@ payloads(){ echo ".claro.com.br
 .vivo.com.br
 .ddivulga.com" > /etc/payloads
 }
-
+con () {
 if cat /etc/so |grep -i ubuntu |grep 16 1> /dev/null 2> /dev/null ; then
    echo "\033[0;36m======================================\033[0m"
    echo "\033[0;32mCONFIGURANDO SEU SQUID...\033[0m"
@@ -525,6 +525,7 @@ case $menu in
 exit; ;;
 1)
    squidconf
+   con
    Crazzy; ;;
 2)
    userd
