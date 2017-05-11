@@ -12,7 +12,7 @@ f="\033[1;36m"
 g="\033[1;41m"
  
 
-function squidconf () {
+function squidconf(){
 clear
 cat -n /etc/issue |grep 1 |cut -d' ' -f6,7,8 |sed 's/1//' |sed 's/	//' > /etc/so 
 if [ -f /etc/lsb-release ]
@@ -34,7 +34,7 @@ clear
    echo "\033[0;31mVoce Tambem Pode Usa O Ip\033[0;33m127.0.0.1\033[0;31mComo Ip SSH\033[0m"
    echo "\033[0;36m=====================================================\033[0m"
 }
-function sshd_config () { 
+function sshd_config(){ 
 echo 'Port 443
 PermitRootLogin yes
 PubkeyAuthentication yes
@@ -42,7 +42,7 @@ PasswordAuthentication yes
 ' >> /etc/ssh/sshd_config
 }
 
-function hostadic () { 
+function hostadic(){ 
 echo '#!/bin/bash
 echo "\033[1;31mHost Atuais\n\n\033[1;32m$(cat /etc/payloads)\n\033[0m"
 echo"\033[1;36mQual Host Deseja Adicionar ?\033[0m"
@@ -53,7 +53,7 @@ squid3 -k reconfigure > /dev/null 2> /dev/null
 echo "\033[0;36m$host Adicionado Com Sucesso!!!\033[0m" ' > /bin/addhosta
 chmod a+x /bin/addhosta
 }
-function removerhostd () { 
+function removerhostd(){ 
 echo '#!/bin/bash
 echo "\033[1;31mHosts Atuais\n\n\033[1;32m$(cat /etc/payloads)\n\033[0m"
 echo "\033[1;36mQual Host Deseja Remover: \033[0m"
@@ -65,13 +65,13 @@ squid3 -k reconfigure >/dev/null 2>/dev/null
 echo "\n\033[1;31mHost Removido\033[0m"
 ' > /bin/removerhost
 }
-function payloads () { 
+function payloads(){ 
 echo ".claro.com.br
 .claro.com.sv
 .vivo.com.br
 .ddivulga.com" > /etc/payloads
 }
-function userd () {
+function userd(){
 clear
  
 if [ $(id -u) -eq 0 ] 
@@ -114,7 +114,7 @@ echo "\033[0;36mQuantos Usuarios Iram Se Conectar?$x" ; read -p " " limiteuser
 fi
 }
  
-function excluir () {
+function excluir(){
 clear
  
    echo "$f Qual o Nome Do Usuario Que Deseja Excluir? $x"
@@ -125,7 +125,7 @@ clear
  
 }
  
-function alter () {
+function alter(){
 clear
  
  echo "$f Qual O Nome Do Usuario Que Deseja Mudar A Senha $x :"
@@ -146,7 +146,7 @@ clear
    echo "$d Senha Modificada Para $senha $x"
 }
  
-function data () {
+function data(){
 clear
  
 echo "$f Qual O Nome Do Usuario Que Voce Quer Mudar A Data De Validade $x :"
@@ -168,7 +168,7 @@ read namers
     
 }
  
-function mon () {
+function mon(){
  
 clear
    echo "$f                 Monitoramento Crazzy                  $x"
@@ -194,7 +194,7 @@ fi
  
 }
  
-function banner () {
+function banner(){
 clear
 cd /etc/ssh* 
     
@@ -219,7 +219,7 @@ fi
  
 }
  
-function addhost () {
+function addhost(){
 clear
 echo "$a"
 cat /etc/payloads
@@ -234,7 +234,7 @@ echo "$f Host $a $hostt $f Adicionada Com Sucesso!!! $x"
  
 }
  
-function detalhes () {
+function detalhes(){
 clear
  
 script="$a CrazzyScript $x"
@@ -282,7 +282,7 @@ case $menu in
 exit; ;;
 1)
    squidconf
-   ubuntu16 () {
+   function ubuntu16(){
    echo "\033[0;36m======================================\033[0m"
    echo "\033[0;32mCONFIGURANDO SEU SQUID...\033[0m"
    sleep 3
@@ -323,7 +323,7 @@ echo "\033[1;36mPronto!!! Aperte Enter Para Voltar Ao Menu \033[0m"
 read mmmmerf
 
 }
-function ubuntu14 () {
+function ubuntu14(){
 
    echo "\033[0;36m======================================\033[0m"
    echo "\033[0;32mCONFIGURANDO SEU SQUID...\033[0m"
@@ -364,7 +364,7 @@ echo "\033[1;36mPronto!!! Aperte Enter Para Voltar Ao Menu \033[0m"
 read mmmmmqww
 
 }
-function centos () {
+function centos(){
 
    echo "\033[0;36m======================================\033[0m"
    echo "\033[0;32mCONFIGURANDO SEU SQUID...\033[0m"
@@ -404,7 +404,7 @@ echo "\033[1;36mPronto!!! Aperte Enter Para Voltar Ao Menu \033[0m"
 read mmmmmmmy
 
 }
-function debian () {
+function debian(){
 
    echo "\033[0;36m======================================\033[0m"
    echo "\033[0;32mCONFIGURANDO SEU SQUID...\033[0m"
@@ -444,7 +444,7 @@ echo "\033[1;36mPronto!!! Aperte Enter Para Voltar Ao Menu \033[0m"
 read mmmmmmm
 
 }
-function kernel () {
+function kernel(){
 
    echo "\033[0;36m======================================\033[0m"
    echo "\033[0;32mCONFIGURANDO SEU SQUID...\033[0m"
