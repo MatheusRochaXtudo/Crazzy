@@ -12,8 +12,66 @@ f="\033[1;36m"
 g="\033[1;41m"
  
 
+function squidconf () {
+clear
+cat -n /etc/issue |grep 1 |cut -d' ' -f6,7,8 |sed 's/1//' |sed 's/	//' > /etc/so 
+if [ -f /etc/lsb-release ]
+then
+sistema=$(cat /etc/lsb-release |grep "DISTRIB_DESCRIPTION" | awk -F = '{print $2}' |sed 's/"//g')
+else
+sistema=Null
+fi
+echo "\033[1;36mPara Configurar Digite o ip Da Sua Vps !\033[0m"
+Digite o ip !\033[0m"
+read -p ": " ip
+clear
+   echo "\033[0;36m====================================================\033[0m"
+   echo "\033[0;31mDesenvolvedor Do Script:\033[0;36m@MatheusR\033[0m"
+   echo "\033[0;31mSeu Sistema Operacional: $f $sistema\033[0m"
+   echo "\033[0;31mIp Da Sua VPS:\033[0;36m $ip\033[0m"
+   echo "\033[0;31mSeu Squid Esta Configurado Para Operar Nas Portas:\033[0;36m80, 8080, 3128, 8799\033[0m"
+   echo "\033[0;31mDropbear Nas Portas:\033[0;36m22 e 443\033[0m"
+   echo "\033[0;31mVoce Tambem Pode Usa O Ip\033[0;33m127.0.0.1\033[0;31mComo Ip SSH\033[0m"
+   echo "\033[0;36m=====================================================\033[0m"
+}
+function sshd_config () { 
+echo 'Port 443
+PermitRootLogin yes
+PubkeyAuthentication yes
+PasswordAuthentication yes
+' >> /etc/ssh/sshd_config
+}
 
-userd () {
+function hostadic () { 
+echo '#!/bin/bash
+echo "\033[1;31mHost Atuais\n\n\033[1;32m$(cat /etc/payloads)\n\033[0m"
+echo"\033[1;36mQual Host Deseja Adicionar ?\033[0m"
+read -p ": " host
+echo "$host" >> /etc/payloads
+squid -k reconfigure > /dev/null 2> /dev/null
+squid3 -k reconfigure > /dev/null 2> /dev/null
+echo "\033[0;36m$host Adicionado Com Sucesso!!!\033[0m" ' > /bin/addhosta
+chmod a+x /bin/addhosta
+}
+function removerhostd () { 
+echo '#!/bin/bash
+echo "\033[1;31mHosts Atuais\n\n\033[1;32m$(cat /etc/payloads)\n\033[0m"
+echo "\033[1;36mQual Host Deseja Remover: \033[0m"
+read host
+hosts = $(cat /etc/payloads |grep -v $host)
+echo "$hosts" > /etc/payloads
+squid -k reconfigure >/dev/null 2>/dev/null
+squid3 -k reconfigure >/dev/null 2>/dev/null
+echo "\n\033[1;31mHost Removido\033[0m"
+' > /bin/removerhost
+}
+function payloads () { 
+echo ".claro.com.br
+.claro.com.sv
+.vivo.com.br
+.ddivulga.com" > /etc/payloads
+}
+function userd () {
 clear
  
 if [ $(id -u) -eq 0 ] 
@@ -56,7 +114,7 @@ echo "\033[0;36mQuantos Usuarios Iram Se Conectar?$x" ; read -p " " limiteuser
 fi
 }
  
-excluir () {
+function excluir () {
 clear
  
    echo "$f Qual o Nome Do Usuario Que Deseja Excluir? $x"
@@ -67,7 +125,7 @@ clear
  
 }
  
-alter () {
+function alter () {
 clear
  
  echo "$f Qual O Nome Do Usuario Que Deseja Mudar A Senha $x :"
@@ -88,7 +146,7 @@ clear
    echo "$d Senha Modificada Para $senha $x"
 }
  
-data () {
+function data () {
 clear
  
 echo "$f Qual O Nome Do Usuario Que Voce Quer Mudar A Data De Validade $x :"
@@ -110,7 +168,7 @@ read namers
     
 }
  
-mon () {
+function mon () {
  
 clear
    echo "$f                 Monitoramento Crazzy                  $x"
@@ -136,7 +194,7 @@ fi
  
 }
  
-banner () {
+function banner () {
 clear
 cd /etc/ssh* 
     
@@ -161,7 +219,7 @@ fi
  
 }
  
-addhost () {
+function addhost () {
 clear
 echo "$a"
 cat /etc/payloads
@@ -176,7 +234,7 @@ echo "$f Host $a $hostt $f Adicionada Com Sucesso!!! $x"
  
 }
  
-detalhes () {
+function detalhes () {
 clear
  
 script="$a CrazzyScript $x"
@@ -265,7 +323,7 @@ echo "\033[1;36mPronto!!! Aperte Enter Para Voltar Ao Menu \033[0m"
 read mmmmerf
 
 }
-ubuntu14 () {
+function ubuntu14 () {
 
    echo "\033[0;36m======================================\033[0m"
    echo "\033[0;32mCONFIGURANDO SEU SQUID...\033[0m"
@@ -306,7 +364,7 @@ echo "\033[1;36mPronto!!! Aperte Enter Para Voltar Ao Menu \033[0m"
 read mmmmmqww
 
 }
-centos () {
+function centos () {
 
    echo "\033[0;36m======================================\033[0m"
    echo "\033[0;32mCONFIGURANDO SEU SQUID...\033[0m"
@@ -346,7 +404,7 @@ echo "\033[1;36mPronto!!! Aperte Enter Para Voltar Ao Menu \033[0m"
 read mmmmmmmy
 
 }
-debian () {
+function debian () {
 
    echo "\033[0;36m======================================\033[0m"
    echo "\033[0;32mCONFIGURANDO SEU SQUID...\033[0m"
@@ -386,7 +444,7 @@ echo "\033[1;36mPronto!!! Aperte Enter Para Voltar Ao Menu \033[0m"
 read mmmmmmm
 
 }
-kernel () {
+function kernel () {
 
    echo "\033[0;36m======================================\033[0m"
    echo "\033[0;32mCONFIGURANDO SEU SQUID...\033[0m"
