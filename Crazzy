@@ -326,7 +326,7 @@ service squid restart 1> /dev/null 2> /dev/null
 echo "\033[1;36mPronto!!! Aperte Enter Para Voltar Ao Menu \033[0m"
 read mmmmerf
 
-
+}
 ubuntu14 () {
 
    echo "\033[0;36m======================================\033[0m"
