@@ -68,7 +68,222 @@ payloads(){ echo ".claro.com.br
 .ddivulga.com" > /etc/payloads
 }
 
-if cat /etc/so |grep -i ubuntu |grep 16 1> /dev/null 2> /dev/null ; then
+userd () {
+clear
+ 
+if [ $(id -u) -eq 0 ] 
+   then    
+   echo "$f Digite O Ip Da Sua Vps Para Continuar$x" ; read ip
+   clear
+   echo "\033[0;36mQual O Nome Do Novo Usuario?\033[0;37m"; read -p " " name    
+   echo "\033[0;36mSenha Qual A Para O Usuario $name ? $x"; read -p " " pass    
+   echo "\033[0;36mQuantos Dias Usuario $name Deve Durar:\033[0;37m"; read -p " " daysrnf   
+echo "\033[0;36mQuantos Usuarios Iram Se Conectar?$x" ; read -p " " limiteuser 
+   echo "\033[0m"    
+   if cat /etc/passwd |grep $name: |grep -vi [a-z]$name |grep -v [0-9]$name > /dev/null 
+      then     
+      echo "\033[1;31mUsuario $name Ja Existe\033[0m"  
+      else     
+       valid=$(date '+%C%y-%m-%d' -d " +$daysrnf days")         
+       datexp=$(date "+%d/%m/%Y" -d "+ $daysrnf days")      
+       useradd -M -s /bin/false $name -e $valid         
+       (echo $pass; echo $pass)|passwd $name 2>/dev/null    
+limite $name $limiteuser
+clear
+       echo "\033[1;36mIp Ssh: $a $ip $x"         
+       echo "\033[1;36mUsuario Da Ssh: $a $name $x"                
+       echo "\033[1;36mSenha Do Usuario: $a $pass $x"                   
+       echo "\033[1;36mProxy/Porta: $a $ip :80/8080/3128/8799$x"                            
+       echo "\033[1;36mData Que Usuario Ira Expirar: $a $datexp $x"                        
+       echo "\033[0;36mMaximo De Usuarios Conectados: $a $limiteuser $x"         
+       echo "$f Digite Enter Para Voltar Ao Menu $x" ; read hcfh                      
+       echo "$pass" > /etc/Crazzydir/senha/$name     
+        
+   fi
+       else    
+       if echo $(id) |grep sudo > /dev/null 
+       then    
+       echo "\033[0;31m Seu Usuario Esta No Grupo Sudo \033[0;m"   
+       echo "$a Para Tornar-se Root, Digite  \033[1;31mSudo Su\033[0m" 
+       else    
+       echo "$a Voce Nao Esta Como Usuario Root, Nem Com Seus Direitos (sudo)\nPara Virar Root Execute \033[1;31msu\033[0m E Digite Sua Senha Root"    
+        fi
+fi
+ 
+ 
+
+ 
+excluir () {
+clear
+ 
+   echo "$f Qual o Nome Do Usuario Que Deseja Excluir? $x"
+   read nome
+   userdel --force $nome > /dev/null 2>/dev/null
+   echo "\033[0;36m O Usuario $nome Foi Excluido \033[0m"
+ 
+ 
+}
+ 
+alter () {
+clear
+ 
+ echo "$f Qual O Nome Do Usuario Que Deseja Mudar A Senha $x :"
+ read namer
+ if cat /etc/passwd |grep $namer: > /dev/null
+   then 
+   echo " "
+   else
+   clear
+   echo "$a Usuario $namer Não Existe $x"
+   sleep 3
+   Crazzy
+ fi
+   echo "$f Qual A Nova Senha Do Usuario $namer $x :"
+   read senha
+   (echo "$senha" ; echo "$senha" ) |passwd $namer > /dev/null 2>/dev/null
+   echo "$senha" > /etc/Crazzydir/senha/$namer 
+   echo "$d Senha Modificada Para $senha $x"
+    
+    
+}
+ 
+data () {
+clear
+ 
+echo "$f Qual O Nome Do Usuario Que Voce Quer Mudar A Data De Validade $x :"
+read namers
+ if cat /etc/passwd |grep $namers: > /dev/null
+   then 
+   echo " "
+   else
+   clear
+   echo "$a Usuario $namers Nao Existe $x"
+   sleep 4
+   Crazzy
+ fi
+   clear
+   echo "$f Qual A Nova Data No Formato AAAA/MM/DD $x"
+   read date
+   date chage -E $date $namer 2> /dev/null
+   echo "\033[1;36mUsuario $namers Data: $date\033[0m"
+    
+}
+ 
+mon () {
+ 
+clear
+   echo "$f                 Monitoramento Crazzy                  $x"
+   echo "$f         Usuario               Conectados /Limite               $x"
+   echo " $a      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ $x"
+ 
+   for users in `awk -F : '$3 > 900 { print $1 }' /etc/passwd |sort |grep -v "nobody" |grep -vi polkitd |grep -vi system-` ; do
+ 
+ 
+if cat /etc/Crazzydir/limite/$users > /dev/null 2> /dev/null
+then
+limitecs=$(cat /etc/Crazzydir/limite/$users)
+else
+limitecs="null"
+fi
+   conectados=$(ps x |grep -vi '[a-z]$users' |grep -vi '$users[a-z]' |grep -v '[1-9]$users' |grep -v '$users[1-9]' |grep $users |grep $users |grep 'sshd:' |grep [priv] |wc -l)     
+   tput setaf 6 ; tput bold ; printf      '          %-32s%s\n' $users $conectados/$limitecs; tput sgr0     
+   echo " $a      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ $x"
+   done
+   echo
+   echo "$f Aperte Enter Para Voltar Ao Menu $x" ; read sdgn
+    
+ 
+}
+ 
+banner () {
+clear
+cd /etc/ssh* 
+    
+if [ -f /etc/ssh/banner.txt ]
+then
+echo "$a"      
+banner=$(cat /etc/ssh/banner.txt)   
+else
+banner="Não há um banner no momento"
+fi       
+   echo "\033[1;36mBanner atual\n\n\033[1;31m$banner\n\033[0m"
+   echo "$f Qual A Mensagem Que Voce Quer Por No Banner? $x"
+   read texto 
+   echo "$texto" > banner.txt 
+   echo "Banner /etc/ssh/banner.txt" >> sshd_config 
+   service sshd restart > /dev/null 2> /dev/null
+   service ssh restart > /dev/null 2> /dev/null
+   echo "$f Banner Adicionado Com Sucesso $x"
+   sleep 2
+   echo "$f Aperte Enter Para voltar Ao Menu $x" ; read ksksvc
+    
+ 
+}
+ 
+addhost () {
+clear
+echo "$a"
+cat /etc/payloads
+echo "$f Qual Host Deseja Adicionar? $x"
+read hostt
+ 
+echo "$hostt" >> /etc/payloads
+squid -k reconfigure > /dev/null 2> /dev/null
+squid3 -k reconfigure > /dev/null 2> /dev/null
+echo
+echo "$f Host $a $hostt $f Adicionada Com Sucesso!!! $x"
+ 
+}
+ 
+detalhes () {
+clear
+ 
+script="$a CrazzyScript $x"
+dono="$a MatheusR $x"
+versao="$a V1.0 $x"
+data="$a 10/04/2017 $x"
+ 
+echo "$f Nome Do Script: $script"
+echo "$f Versão: $versao"
+echo "$f Desenvolvido Por: $dono"
+echo "$f Data De Criação: $data"
+ 
+}
+ 
+ 
+#menu
+echo "$f"
+figlet crazzy
+echo "\033[0;31m------------------------------------------------- $x"
+echo "\033[1;36mBem Vindo Ao Menu De Opções Do CrazzyScript,
+Toda Vez Que Quizer Entra No Menu, Digite \033[2;31mCrazzy \033[0m"
+echo
+echo "\033[1;31m
+[$f 0$a ] $f  Sair Do Menu $a
+[$f 1$a ] \033[1;36m  Configurar Sua Vps \033[1;31m
+[$f 2$a ] \033[1;36m  Criar Usuarios \033[1;31m
+[$f 3$a ] \033[1;36m  Deletar Usuarios \033[1;31m
+[$f 4$a ] \033[1;36m  Mudar Senha De Usuario \033[1;31m
+[$f 5$a ] \033[1;36m  Mudar Data De Validade \033[1;31m
+[$f 6$a ] \033[1;36m  Monitorar Usuarios \033[1;31m
+[$f 7$a ] \033[1;36m  Banner $a
+[$f 8$a ] $f  Adicionar Host $a
+[$f 9$a ] $f  Detalhes Do Script $a
+[$f 10$a ] $f Atualizar o CrazzyScript $a  
+[$f 11$a ] $f Desinstalar o CrazzyScript $x"        
+echo "\033[0;31m------------------------------------------------- $x"
+echo   
+echo "$a Escolha Uma Opção"
+read -p ":" menu
+  
+echo
+case $menu in
+ 
+0)
+exit; ;;
+1)
+   squidconf
+   if cat /etc/so |grep -i ubuntu |grep 16 1> /dev/null 2> /dev/null ; then
    echo "\033[0;36m======================================\033[0m"
    echo "\033[0;32mCONFIGURANDO SEU SQUID...\033[0m"
    sleep 3
@@ -309,223 +524,6 @@ service squid3 restart > /dev/null 2> /dev/null
 
 echo "\033[1;36mPronto!!! Aperte Enter Para Voltar Ao Menu \033[0m"
 read mmmmmmmliojhjhwfg
-}
-userd () {
-clear
- 
-if [ $(id -u) -eq 0 ] 
-   then    
-   echo "$f Digite O Ip Da Sua Vps Para Continuar$x" ; read ip
-   clear
-   echo "\033[0;36mQual O Nome Do Novo Usuario?\033[0;37m"; read -p " " name    
-   echo "\033[0;36mSenha Qual A Para O Usuario $name ? $x"; read -p " " pass    
-   echo "\033[0;36mQuantos Dias Usuario $name Deve Durar:\033[0;37m"; read -p " " daysrnf   
-echo "\033[0;36mQuantos Usuarios Iram Se Conectar?$x" ; read -p " " limiteuser 
-   echo "\033[0m"    
-   if cat /etc/passwd |grep $name: |grep -vi [a-z]$name |grep -v [0-9]$name > /dev/null 
-      then     
-      echo "\033[1;31mUsuario $name Ja Existe\033[0m"  
-      else     
-       valid=$(date '+%C%y-%m-%d' -d " +$daysrnf days")         
-       datexp=$(date "+%d/%m/%Y" -d "+ $daysrnf days")      
-       useradd -M -s /bin/false $name -e $valid         
-       (echo $pass; echo $pass)|passwd $name 2>/dev/null    
-limite $name $limiteuser
-clear
-       echo "\033[1;36mIp Ssh: $a $ip $x"         
-       echo "\033[1;36mUsuario Da Ssh: $a $name $x"                
-       echo "\033[1;36mSenha Do Usuario: $a $pass $x"                   
-       echo "\033[1;36mProxy/Porta: $a $ip :80/8080/3128/8799$x"                            
-       echo "\033[1;36mData Que Usuario Ira Expirar: $a $datexp $x"                        
-       echo "\033[0;36mMaximo De Usuarios Conectados: $a $limiteuser $x"         
-       echo "$f Digite Enter Para Voltar Ao Menu $x" ; read hcfh                      
-       echo "$pass" > /etc/Crazzydir/senha/$name     
-        
-   fi
-       else    
-       if echo $(id) |grep sudo > /dev/null 
-       then    
-       echo "\033[0;31m Seu Usuario Esta No Grupo Sudo \033[0;m"   
-       echo "$a Para Tornar-se Root, Digite  \033[1;31mSudo Su\033[0m" 
-       else    
-       echo "$a Voce Nao Esta Como Usuario Root, Nem Com Seus Direitos (sudo)\nPara Virar Root Execute \033[1;31msu\033[0m E Digite Sua Senha Root"    
-        fi
-fi
- 
- 
-
- 
-excluir () {
-clear
- 
-   echo "$f Qual o Nome Do Usuario Que Deseja Excluir? $x"
-   read nome
-   userdel --force $nome > /dev/null 2>/dev/null
-   echo "\033[0;36m O Usuario $nome Foi Excluido \033[0m"
- 
- 
-}
- 
-alter () {
-clear
- 
- echo "$f Qual O Nome Do Usuario Que Deseja Mudar A Senha $x :"
- read namer
- if cat /etc/passwd |grep $namer: > /dev/null
-   then 
-   echo " "
-   else
-   clear
-   echo "$a Usuario $namer Não Existe $x"
-   sleep 3
-   Crazzy
- fi
-   echo "$f Qual A Nova Senha Do Usuario $namer $x :"
-   read senha
-   (echo "$senha" ; echo "$senha" ) |passwd $namer > /dev/null 2>/dev/null
-   echo "$senha" > /etc/Crazzydir/senha/$namer 
-   echo "$d Senha Modificada Para $senha $x"
-    
-    
-}
- 
-data () {
-clear
- 
-echo "$f Qual O Nome Do Usuario Que Voce Quer Mudar A Data De Validade $x :"
-read namers
- if cat /etc/passwd |grep $namers: > /dev/null
-   then 
-   echo " "
-   else
-   clear
-   echo "$a Usuario $namers Nao Existe $x"
-   sleep 4
-   Crazzy
- fi
-   clear
-   echo "$f Qual A Nova Data No Formato AAAA/MM/DD $x"
-   read date
-   date chage -E $date $namer 2> /dev/null
-   echo "\033[1;36mUsuario $namers Data: $date\033[0m"
-    
-}
- 
-mon () {
- 
-clear
-   echo "$f                 Monitoramento Crazzy                  $x"
-   echo "$f         Usuario               Conectados /Limite               $x"
-   echo " $a      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ $x"
- 
-   for users in `awk -F : '$3 > 900 { print $1 }' /etc/passwd |sort |grep -v "nobody" |grep -vi polkitd |grep -vi system-` ; do
- 
- 
-if cat /etc/Crazzydir/limite/$users > /dev/null 2> /dev/null
-then
-limitecs=$(cat /etc/Crazzydir/limite/$users)
-else
-limitecs="null"
-fi
-   conectados=$(ps x |grep -vi '[a-z]$users' |grep -vi '$users[a-z]' |grep -v '[1-9]$users' |grep -v '$users[1-9]' |grep $users |grep $users |grep 'sshd:' |grep [priv] |wc -l)     
-   tput setaf 6 ; tput bold ; printf      '          %-32s%s\n' $users $conectados/$limitecs; tput sgr0     
-   echo " $a      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ $x"
-   done
-   echo
-   echo "$f Aperte Enter Para Voltar Ao Menu $x" ; read sdgn
-    
- 
-}
- 
-banner () {
-clear
-cd /etc/ssh* 
-    
-if [ -f /etc/ssh/banner.txt ]
-then
-echo "$a"      
-banner=$(cat /etc/ssh/banner.txt)   
-else
-banner="Não há um banner no momento"
-fi       
-   echo "\033[1;36mBanner atual\n\n\033[1;31m$banner\n\033[0m"
-   echo "$f Qual A Mensagem Que Voce Quer Por No Banner? $x"
-   read texto 
-   echo "$texto" > banner.txt 
-   echo "Banner /etc/ssh/banner.txt" >> sshd_config 
-   service sshd restart > /dev/null 2> /dev/null
-   service ssh restart > /dev/null 2> /dev/null
-   echo "$f Banner Adicionado Com Sucesso $x"
-   sleep 2
-   echo "$f Aperte Enter Para voltar Ao Menu $x" ; read ksksvc
-    
- 
-}
- 
-addhost () {
-clear
-echo "$a"
-cat /etc/payloads
-echo "$f Qual Host Deseja Adicionar? $x"
-read hostt
- 
-echo "$hostt" >> /etc/payloads
-squid -k reconfigure > /dev/null 2> /dev/null
-squid3 -k reconfigure > /dev/null 2> /dev/null
-echo
-echo "$f Host $a $hostt $f Adicionada Com Sucesso!!! $x"
- 
-}
- 
-detalhes () {
-clear
- 
-script="$a CrazzyScript $x"
-dono="$a MatheusR $x"
-versao="$a V1.0 $x"
-data="$a 10/04/2017 $x"
- 
-echo "$f Nome Do Script: $script"
-echo "$f Versão: $versao"
-echo "$f Desenvolvido Por: $dono"
-echo "$f Data De Criação: $data"
- 
-}
- 
- 
-#menu
-echo "$f"
-figlet crazzy
-echo "\033[0;31m------------------------------------------------- $x"
-echo "\033[1;36mBem Vindo Ao Menu De Opções Do CrazzyScript,
-Toda Vez Que Quizer Entra No Menu, Digite \033[2;31mCrazzy \033[0m"
-echo
-echo "\033[1;31m
-[$f 0$a ] $f  Sair Do Menu $a
-[$f 1$a ] \033[1;36m  Configurar Sua Vps \033[1;31m
-[$f 2$a ] \033[1;36m  Criar Usuarios \033[1;31m
-[$f 3$a ] \033[1;36m  Deletar Usuarios \033[1;31m
-[$f 4$a ] \033[1;36m  Mudar Senha De Usuario \033[1;31m
-[$f 5$a ] \033[1;36m  Mudar Data De Validade \033[1;31m
-[$f 6$a ] \033[1;36m  Monitorar Usuarios \033[1;31m
-[$f 7$a ] \033[1;36m  Banner $a
-[$f 8$a ] $f  Adicionar Host $a
-[$f 9$a ] $f  Detalhes Do Script $a
-[$f 10$a ] $f Atualizar o CrazzyScript $a  
-[$f 11$a ] $f Desinstalar o CrazzyScript $x"        
-echo "\033[0;31m------------------------------------------------- $x"
-echo   
-echo "$a Escolha Uma Opção"
-read -p ":" menu
-  
-echo
-case $menu in
- 
-0)
-exit; ;;
-1)
-   squidconf
-   
    Crazzy; ;;
 2)
    userd
