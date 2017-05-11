@@ -16,7 +16,7 @@ if [ -d /etc/CrazzyD/senha ]
 then
 true
 else
-mkdir /etc/VpsPackdir/senha
+mkdir /etc/CrazzyD/senha
 fi
 if [ -d /etc/CrazzyD/limite ]
 then
