@@ -33,7 +33,7 @@ clear
    echo "\033[0;31mVoce Tambem Pode Usa O Ip\033[0;33m127.0.0.1\033[0;31mComo Ip SSH\033[0m"
    echo "\033[0;36m=====================================================\033[0m"
 }
-sshd_config(){ 
+sshd_config () { 
 echo 'Port 443
 PermitRootLogin yes
 PubkeyAuthentication yes
@@ -41,7 +41,8 @@ PasswordAuthentication yes
 ' >> /etc/ssh/sshd_config
 }
 
-hostadic(){ echo '#!/bin/bash
+hostadic () { 
+echo '#!/bin/bash
 echo "\033[1;31mHost Atuais\n\n\033[1;32m$(cat /etc/payloads)\n\033[0m"
 echo"\033[1;36mQual Host Deseja Adicionar ?\033[0m"
 read -p ": " host
@@ -51,7 +52,8 @@ squid3 -k reconfigure > /dev/null 2> /dev/null
 echo "\033[0;36m$host Adicionado Com Sucesso!!!\033[0m" ' > /bin/addhosta
 chmod a+x /bin/addhosta
 }
-removerhostd(){ echo '#!/bin/bash
+removerhostd () { 
+echo '#!/bin/bash
 echo "\033[1;31mHosts Atuais\n\n\033[1;32m$(cat /etc/payloads)\n\033[0m"
 echo "\033[1;36mQual Host Deseja Remover: \033[0m"
 read host
@@ -112,7 +114,7 @@ echo "\033[0;36mQuantos Usuarios Iram Se Conectar?$x" ; read -p " " limiteuser
 fi
  
  
-
+}
  
 excluir () {
 clear
