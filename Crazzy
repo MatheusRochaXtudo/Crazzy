@@ -11,7 +11,7 @@ e="\033[1;35m"
 f="\033[1;36m"
 g="\033[1;41m"
  
- squidconf(){
+ squidconf (){
 clear
 cat -n /etc/issue |grep 1 |cut -d' ' -f6,7,8 |sed 's/1//' |sed 's/	//' > /etc/so 
 if [ -f /etc/lsb-release ]
@@ -283,7 +283,7 @@ case $menu in
 exit; ;;
 1)
    squidconf
-   if cat /etc/so |grep -i ubuntu |grep 16 1> /dev/null 2> /dev/null ; then
+   ubuntu16 () {
    echo "\033[0;36m======================================\033[0m"
    echo "\033[0;32mCONFIGURANDO SEU SQUID...\033[0m"
    sleep 3
@@ -323,10 +323,9 @@ service squid restart 1> /dev/null 2> /dev/null
 echo "\033[1;36mPronto!!! Aperte Enter Para Voltar Ao Menu \033[0m"
 read mmmmerf
 
-exit 0
-fi
 
-if cat /etc/so |grep -i ubuntu 1> /dev/null 2> /dev/null ; then
+ubuntu14 () {
+
    echo "\033[0;36m======================================\033[0m"
    echo "\033[0;32mCONFIGURANDO SEU SQUID...\033[0m"
    sleep 3
@@ -364,10 +363,10 @@ service squid3 restart 1> /dev/null 2> /dev/null
  
 echo "\033[1;36mPronto!!! Aperte Enter Para Voltar Ao Menu \033[0m"
 read mmmmmqww
-exit 
-fi
 
-if cat /etc/so |grep -i centos 1> /dev/null 2> /dev/null ; then
+}
+centos () {
+
    echo "\033[0;36m======================================\033[0m"
    echo "\033[0;32mCONFIGURANDO SEU SQUID...\033[0m"
    sleep 3
@@ -404,10 +403,10 @@ service squid restart 1> /dev/null 2> /dev/null
 
 echo "\033[1;36mPronto!!! Aperte Enter Para Voltar Ao Menu \033[0m"
 read mmmmmmmy
-exit
-fi
 
-if cat /etc/so |grep -i debian 1> /dev/null 2> /dev/null ; then
+}
+debian () {
+
    echo "\033[0;36m======================================\033[0m"
    echo "\033[0;32mCONFIGURANDO SEU SQUID...\033[0m"
    sleep 3
@@ -444,9 +443,10 @@ service squid3 restart 1> /dev/null 2> /dev/null
 
 echo "\033[1;36mPronto!!! Aperte Enter Para Voltar Ao Menu \033[0m"
 read mmmmmmm
-exit 0
-fi
-if cat /etc/issue |grep -i kernel 1> /dev/null 2> /dev/null ; then
+
+}
+kernel () {
+
    echo "\033[0;36m======================================\033[0m"
    echo "\033[0;32mCONFIGURANDO SEU SQUID...\033[0m"
    sleep 3
@@ -483,49 +483,22 @@ service squid restart 1> /dev/null 2> /dev/null
 
 echo "\033[1;36mPronto!!! Aperte Enter Para Voltar Ao Menu \033[0m"
 read mmmmmmmliojhjh
-exit
-fi
-if
-   echo "\033[0;36m======================================\033[0m"
-   echo "\033[0;32mCONFIGURANDO SEU SQUID...\033[0m"
-   sleep 3
-   echo "\033[0;33m      Sucesso...\033[0m"
-   sleep 1 
-   echo "\033[0;32mCONFIGURANDO SUA VPS...\033[0m"
-   sleep 3
-   echo "\033[0;33m      Sucesso...\033[0m"
-   echo "\033[0;36m======================================\033[0m"
-yum -y update 1> /dev/null 2> /dev/null
-yum install -y squid 1> /dev/null 2> /dev/null
-apt-get update > /dev/null 2> /dev/null
-apt-get install -y squid3 > /dev/null 2>/dev/null
-service httpd stop 1> /dev/null 2> /dev/null
-service apache2 stop >/dev/null 2> /dev/null
-chattr -i /etc/ssh/sshd_config > /dev/null 2> /dev/null
-sshd_config
-service sshd restart 1> /dev/null 2> /dev/null
-service ssh restart > /dev/null 2> /dev/null
-echo "http_port 80
-http_port 8080
-http_port 8799
-http_port 3128
-visible_hostname Crazzy
-acl ip dstdomain $ip
-http_access allow ip" > /etc/squid*/squid.conf
-echo 'acl accept dstdomain -i "/etc/payloads"
-http_access allow accept
-acl local dstdomain localhost
-http_access allow local
-acl iplocal dstdomain 127.0.0.1
-http_access allow iplocal
-http_access deny all' >> /etc/squid*/squid.conf
-payloads
-service squid restart 1> /dev/null 2> /dev/null
-service squid3 restart > /dev/null 2> /dev/null
 
-echo "\033[1;36mPronto!!! Aperte Enter Para Voltar Ao Menu \033[0m"
-read mmmmmmmliojhjhwfg
-fi
+}
+    if cat /etc/issue | grep "Debian" 1>/dev/null 2>/dev/null; then 
+     
+    debian
+     
+    elif cat /etc/issue | grep "Ubuntu 16" 1>/dev/null 2>/dev/null; then 
+     
+    ubuntu16
+     
+    elif cat /etc/issue | grep "Ubuntu" 1>/dev/null 2>/dev/null; then 
+     
+    centos
+    elif cat /etc/issue | grep "Centus" 1>/dev/null 2>/dev/null; then 
+     
+    centus
    Crazzy; ;;
 2)
    userd
