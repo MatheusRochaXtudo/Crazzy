@@ -11,7 +11,7 @@ e="\033[1;35m"
 f="\033[1;36m"
 g="\033[1;41m"
  
- squidconf (){
+ squidconf () {
 clear
 cat -n /etc/issue |grep 1 |cut -d' ' -f6,7,8 |sed 's/1//' |sed 's/	//' > /etc/so 
 if [ -f /etc/lsb-release ]
@@ -88,8 +88,8 @@ echo "\033[0;36mQuantos Usuarios Iram Se Conectar?$x" ; read -p " " limiteuser
        datexp=$(date "+%d/%m/%Y" -d "+ $daysrnf days")      
        useradd -M -s /bin/false $name -e $valid         
        (echo $pass; echo $pass)|passwd $name 2>/dev/null    
-limite $name $limiteuser
-clear
+       limite $name $limiteuser
+       clear
        echo "\033[1;36mIp Ssh: $a $ip $x"         
        echo "\033[1;36mUsuario Da Ssh: $a $name $x"                
        echo "\033[1;36mSenha Do Usuario: $a $pass $x"                   
@@ -107,7 +107,7 @@ clear
        echo "$a Para Tornar-se Root, Digite  \033[1;31mSudo Su\033[0m" 
        else    
        echo "$a Voce Nao Esta Como Usuario Root, Nem Com Seus Direitos (sudo)\nPara Virar Root Execute \033[1;31msu\033[0m E Digite Sua Senha Root"    
-        fi
+       fi
 fi
  
  
