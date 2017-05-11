@@ -32,7 +32,7 @@ clear
    echo "\033[0;31mDropbear Nas Portas:\033[0;36m22 e 443\033[0m"
    echo "\033[0;31mVoce Tambem Pode Usa O Ip\033[0;33m127.0.0.1\033[0;31mComo Ip SSH\033[0m"
    echo "\033[0;36m=====================================================\033[0m"
-
+}
 sshd_config(){ 
 echo 'Port 443
 PermitRootLogin yes
@@ -62,7 +62,8 @@ squid3 -k reconfigure >/dev/null 2>/dev/null
 echo "\n\033[1;31mHost Removido\033[0m"
 ' > /bin/removerhost
 }
-payloads(){ echo ".claro.com.br
+payloads () { 
+echo ".claro.com.br
 .claro.com.sv
 .vivo.com.br
 .ddivulga.com" > /etc/payloads
