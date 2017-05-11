@@ -481,15 +481,15 @@ for user in `awk -F : '$3 > 900 { print $1 }' /etc/passwd |grep -v "nobody" |gre
 do
 if [ -e /etc/CrazzyD/senha/$user ]
 then
-pass=$(cat /etc/VCrazzyD/senha/$user)
+pass=$(cat /etc/CrazzyD/senha/$user)
 else
 echo -e "\033[1;31mNão Foi Fossivel Ter a Senha do Usuario\033[1;37m ($user)"
 read -p "Digite a Senha Manualmente ou Tecle ENTER: " pass
 fi
 
-if [ -e /etc/VpsPackdir/limite/$user ]
+if [ -e /etc/CrazzyD/limite/$user ]
 then
-limite=$(cat /etc/VpsPackdir/limite/$user)
+limite=$(cat /etc/CrazzyD/limite/$user)
 echo "$user:$pass:$limite" >> /etc/CrazzyD/backup
 echo -e "\033[1;37mUser $user Backup [\033[1;31mOK\033[1;37m]\033[0m"
 else
