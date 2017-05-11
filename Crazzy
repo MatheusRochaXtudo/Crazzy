@@ -485,6 +485,7 @@ echo "\033[1;36mPronto!!! Aperte Enter Para Voltar Ao Menu \033[0m"
 read mmmmmmmliojhjh
 exit
 fi
+if
    echo "\033[0;36m======================================\033[0m"
    echo "\033[0;32mCONFIGURANDO SEU SQUID...\033[0m"
    sleep 3
@@ -524,6 +525,7 @@ service squid3 restart > /dev/null 2> /dev/null
 
 echo "\033[1;36mPronto!!! Aperte Enter Para Voltar Ao Menu \033[0m"
 read mmmmmmmliojhjhwfg
+fi
    Crazzy; ;;
 2)
    userd
