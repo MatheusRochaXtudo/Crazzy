@@ -1,31 +1,17 @@
-#!/bin/bash
-if [ $(id -u) -eq 0 ]
-then
+#!/bin/sh
+ 
 clear
-else
-echo -e "\033[0:36Execute O script Como Usuario \033[1;31mroot\033[0m"
-exit
-fi
-if [ -d /etc/CrazzyD ]
-then
-true
-else
-mkdir /etc/CrazzyD
-fi
-if [ -d /etc/CrazzyD/senha ]
-then
-true
-else
-mkdir /etc/CrazzyD/senha
-fi
-if [ -d /etc/CrazzyD/limite ]
-then
-true
-else
-mkdir /etc/CrazzyD/limite
-fi
-
-function squidconf(){
+ 
+x="\033[0m"
+a="\033[1;31m"
+b="\033[1;32m"
+c="\033[1;33m"
+d="\033[1;34m"
+e="\033[1;35m"
+f="\033[1;36m"
+g="\033[1;41m"
+ 
+ squidconf(){
 clear
 cat -n /etc/issue |grep 1 |cut -d' ' -f6,7,8 |sed 's/1//' |sed 's/	//' > /etc/so 
 if [ -f /etc/lsb-release ]
@@ -34,20 +20,20 @@ sistema=$(cat /etc/lsb-release |grep "DISTRIB_DESCRIPTION" | awk -F = '{print $2
 else
 sistema=Null
 fi
-echo -e "\033[1;36mPara Configurar Digite o Ip.
+echo "\033[1;36mPara Configurar Digite o ip Da Sua Vps !\033[0m"
 Digite o ip !\033[0m"
 read -p ": " ip
 clear
-   echo -e"\033[0;36m====================================================\033[0m"
-   echo -e"\033[0;31mDesenvolvedor Do Script:\033[0;36m@MatheusR\033[0m"
-   echo -e "\033[0;31mSeu Sistema Operacional: $f $sistema\033[0m"
-   echo -e "\033[0;31mIp Da Sua VPS:\033[0;36m $ip\033[0m"
-   echo -e "\033[0;31mSeu Squid Esta Configurado Para Operar Nas Portas:\033[0;36m80, 8080, 3128, 8799\033[0m"
-   echo -e "\033[0;31mDropbear Nas Portas:\033[0;36m22 e 443\033[0m"
-   echo -e "\033[0;31mVoce Tambem Pode Usa O Ip\033[0;33m127.0.0.1\033[0;31mComo Ip SSH\033[0m"
-   echo -e "\033[0;36m=====================================================\033[0m"
+   echo "\033[0;36m====================================================\033[0m"
+   echo "\033[0;31mDesenvolvedor Do Script:\033[0;36m@MatheusR\033[0m"
+   echo "\033[0;31mSeu Sistema Operacional: $f $sistema\033[0m"
+   echo "\033[0;31mIp Da Sua VPS:\033[0;36m $ip\033[0m"
+   echo "\033[0;31mSeu Squid Esta Configurado Para Operar Nas Portas:\033[0;36m80, 8080, 3128, 8799\033[0m"
+   echo "\033[0;31mDropbear Nas Portas:\033[0;36m22 e 443\033[0m"
+   echo "\033[0;31mVoce Tambem Pode Usa O Ip\033[0;33m127.0.0.1\033[0;31mComo Ip SSH\033[0m"
+   echo "\033[0;36m=====================================================\033[0m"
 
-function sshd_config(){ 
+sshd_config(){ 
 echo 'Port 443
 PermitRootLogin yes
 PubkeyAuthentication yes
@@ -55,43 +41,43 @@ PasswordAuthentication yes
 ' >> /etc/ssh/sshd_config
 }
 
-function hostadic(){ echo '#!/bin/bash
-echo -e "\033[1;31mHost Atuais\n\n\033[1;32m$(cat /etc/payloads)\n\033[0m"
-echo-e "\033[1;36mQual Host Deseja Adicionar ?\033[0m"
+hostadic(){ echo '#!/bin/bash
+echo "\033[1;31mHost Atuais\n\n\033[1;32m$(cat /etc/payloads)\n\033[0m"
+echo"\033[1;36mQual Host Deseja Adicionar ?\033[0m"
 read -p ": " host
 echo "$host" >> /etc/payloads
 squid -k reconfigure > /dev/null 2> /dev/null
 squid3 -k reconfigure > /dev/null 2> /dev/null
-echo -e "\033[0;36m$host Adicionado Com Sucesso!!!\033[0m" ' > /bin/addhost
-chmod a+x /bin/addhost
+echo "\033[0;36m$host Adicionado Com Sucesso!!!\033[0m" ' > /bin/addhosta
+chmod a+x /bin/addhosta
 }
-function removerhostd(){ echo '#!/bin/bash
-echo -e "\033[1;31mHosts Atuais\n\n\033[1;32m$(cat /etc/payloads)\n\033[0m"
-echo -ne "\033[1;36mQual Host Deseja Remover: \033[0m"
+removerhostd(){ echo '#!/bin/bash
+echo "\033[1;31mHosts Atuais\n\n\033[1;32m$(cat /etc/payloads)\n\033[0m"
+echo "\033[1;36mQual Host Deseja Remover: \033[0m"
 read host
 hosts = $(cat /etc/payloads |grep -v $host)
 echo "$hosts" > /etc/payloads
 squid -k reconfigure >/dev/null 2>/dev/null
 squid3 -k reconfigure >/dev/null 2>/dev/null
-echo -e "\n\033[1;31mHost Removido\033[0m"
+echo "\n\033[1;31mHost Removido\033[0m"
 ' > /bin/removerhost
 }
-function payloads(){ echo ".claro.com.br
+payloads(){ echo ".claro.com.br
 .claro.com.sv
 .vivo.com.br
 .ddivulga.com" > /etc/payloads
 }
 
 if cat /etc/so |grep -i ubuntu |grep 16 1> /dev/null 2> /dev/null ; then
-   echo -e "\033[0;36m======================================\033[0m"
-   echo -e "\033[0;32mCONFIGURANDO SEU SQUID...\033[0m"
-   sleep 3
-   echo -e "\033[0;33m      Sucesso...\033[0m"
-   sleep 1 
-   echo -e "\033[0;32mCONFIGURANDO SUA VPS...\033[0m"
+   echo "\033[0;36m======================================\033[0m"
+   echo "\033[0;32mCONFIGURANDO SEU SQUID...\033[0m"
    sleep 3
    echo "\033[0;33m      Sucesso...\033[0m"
-   echo -e "\033[0;36m======================================\033[0m"
+   sleep 1 
+   echo "\033[0;32mCONFIGURANDO SUA VPS...\033[0m"
+   sleep 3
+   echo "\033[0;33m      Sucesso...\033[0m"
+   echo "\033[0;36m======================================\033[0m"
    sleep 2\033[0m"
 apt-get update 1> /dev/null 2> /dev/null
 apt-get install -y squid3 1> /dev/null 2> /dev/null
@@ -116,26 +102,25 @@ acl iplocal dstdomain 127.0.0.1
 http_access allow iplocal
 http_access deny all' >> /etc/squid/squid.conf
 
-hostadic
-removerhostd
+
 payloads
 service squid restart 1> /dev/null 2> /dev/null
-echo -e "\033[1;36mPronto!!! Aperte Enter Para Voltar Ao Menu \033[0m"
+echo "\033[1;36mPronto!!! Aperte Enter Para Voltar Ao Menu \033[0m"
 read mmmmerf
 
 exit 0
 fi
 
 if cat /etc/so |grep -i ubuntu 1> /dev/null 2> /dev/null ; then
-   echo -e "\033[0;36m======================================\033[0m"
-   echo -e "\033[0;32mCONFIGURANDO SEU SQUID...\033[0m"
-   sleep 3
-   echo -e "\033[0;33m      Sucesso...\033[0m"
-   sleep 1 
-   echo -e "\033[0;32mCONFIGURANDO SUA VPS...\033[0m"
+   echo "\033[0;36m======================================\033[0m"
+   echo "\033[0;32mCONFIGURANDO SEU SQUID...\033[0m"
    sleep 3
    echo "\033[0;33m      Sucesso...\033[0m"
-   echo -e "\033[0;36m======================================\033[0m"
+   sleep 1 
+   echo "\033[0;32mCONFIGURANDO SUA VPS...\033[0m"
+   sleep 3
+   echo "\033[0;33m      Sucesso...\033[0m"
+   echo "\033[0;36m======================================\033[0m"
 
 apt-get update 1> /dev/null 2> /dev/null
 apt-get install -y squid3 1> /dev/null 2> /dev/null
@@ -161,23 +146,22 @@ http_access allow iplocal
 http_access deny all' >> /etc/squid3/squid.conf
 payloads
 service squid3 restart 1> /dev/null 2> /dev/null
-hostadic
-removerhostd 
-echo -e "\033[1;36mPronto!!! Aperte Enter Para Voltar Ao Menu \033[0m"
+ 
+echo "\033[1;36mPronto!!! Aperte Enter Para Voltar Ao Menu \033[0m"
 read mmmmmqww
 exit 
 fi
 
 if cat /etc/so |grep -i centos 1> /dev/null 2> /dev/null ; then
-   echo -e "\033[0;36m======================================\033[0m"
-   echo -e "\033[0;32mCONFIGURANDO SEU SQUID...\033[0m"
-   sleep 3
-   echo -e "\033[0;33m      Sucesso...\033[0m"
-   sleep 1 
-   echo -e "\033[0;32mCONFIGURANDO SUA VPS...\033[0m"
+   echo "\033[0;36m======================================\033[0m"
+   echo "\033[0;32mCONFIGURANDO SEU SQUID...\033[0m"
    sleep 3
    echo "\033[0;33m      Sucesso...\033[0m"
-   echo -e "\033[0;36m======================================\033[0m"
+   sleep 1 
+   echo "\033[0;32mCONFIGURANDO SUA VPS...\033[0m"
+   sleep 3
+   echo "\033[0;33m      Sucesso...\033[0m"
+   echo "\033[0;36m======================================\033[0m"
 yum -y update 1> /dev/null 2> /dev/null
 yum install -y squid 1> /dev/null 2> /dev/null
 
@@ -202,23 +186,22 @@ http_access allow iplocal
 http_access deny all' >> /etc/squid/squid.conf
 payloads
 service squid restart 1> /dev/null 2> /dev/null
-hostadic
-removerhostd
-echo -e "\033[1;36mPronto!!! Aperte Enter Para Voltar Ao Menu \033[0m"
+
+echo "\033[1;36mPronto!!! Aperte Enter Para Voltar Ao Menu \033[0m"
 read mmmmmmmy
 exit
 fi
 
 if cat /etc/so |grep -i debian 1> /dev/null 2> /dev/null ; then
-   echo -e "\033[0;36m======================================\033[0m"
-   echo -e "\033[0;32mCONFIGURANDO SEU SQUID...\033[0m"
-   sleep 3
-   echo -e "\033[0;33m      Sucesso...\033[0m"
-   sleep 1 
-   echo -e "\033[0;32mCONFIGURANDO SUA VPS...\033[0m"
+   echo "\033[0;36m======================================\033[0m"
+   echo "\033[0;32mCONFIGURANDO SEU SQUID...\033[0m"
    sleep 3
    echo "\033[0;33m      Sucesso...\033[0m"
-   echo -e "\033[0;36m======================================\033[0m"
+   sleep 1 
+   echo "\033[0;32mCONFIGURANDO SUA VPS...\033[0m"
+   sleep 3
+   echo "\033[0;33m      Sucesso...\033[0m"
+   echo "\033[0;36m======================================\033[0m"
 apt-get update 1> /dev/null 2> /dev/null
 apt-get install -y squid3 1> /dev/null 2> /dev/null
 service apache2 stop 1> /dev/null 2> /dev/null
@@ -243,22 +226,21 @@ http_access allow iplocal
 http_access deny all' >> /etc/squid3/squid.conf
 payloads
 service squid3 restart 1> /dev/null 2> /dev/null
-hostadic
-removerhostd
-echo -e "\033[1;36mPronto!!! Aperte Enter Para Voltar Ao Menu \033[0m"
+
+echo "\033[1;36mPronto!!! Aperte Enter Para Voltar Ao Menu \033[0m"
 read mmmmmmm
 exit 0
 fi
 if cat /etc/issue |grep -i kernel 1> /dev/null 2> /dev/null ; then
-   echo -e "\033[0;36m======================================\033[0m"
-   echo -e "\033[0;32mCONFIGURANDO SEU SQUID...\033[0m"
-   sleep 3
-   echo -e "\033[0;33m      Sucesso...\033[0m"
-   sleep 1 
-   echo -e "\033[0;32mCONFIGURANDO SUA VPS...\033[0m"
+   echo "\033[0;36m======================================\033[0m"
+   echo "\033[0;32mCONFIGURANDO SEU SQUID...\033[0m"
    sleep 3
    echo "\033[0;33m      Sucesso...\033[0m"
-   echo -e "\033[0;36m======================================\033[0m"
+   sleep 1 
+   echo "\033[0;32mCONFIGURANDO SUA VPS...\033[0m"
+   sleep 3
+   echo "\033[0;33m      Sucesso...\033[0m"
+   echo "\033[0;36m======================================\033[0m"
 yum -y update 1> /dev/null 2> /dev/null
 yum install -y squid 1> /dev/null 2> /dev/null
 
@@ -283,21 +265,20 @@ http_access allow iplocal
 http_access deny all' >> /etc/squid/squid.conf
 payloads
 service squid restart 1> /dev/null 2> /dev/null
-hostadic
-removerhostd
-echo -e "\033[1;36mPronto!!! Aperte Enter Para Voltar Ao Menu \033[0m"
+
+echo "\033[1;36mPronto!!! Aperte Enter Para Voltar Ao Menu \033[0m"
 read mmmmmmmliojhjh
 exit
 fi
-   echo -e "\033[0;36m======================================\033[0m"
-   echo -e "\033[0;32mCONFIGURANDO SEU SQUID...\033[0m"
-   sleep 3
-   echo -e "\033[0;33m      Sucesso...\033[0m"
-   sleep 1 
-   echo -e "\033[0;32mCONFIGURANDO SUA VPS...\033[0m"
+   echo "\033[0;36m======================================\033[0m"
+   echo "\033[0;32mCONFIGURANDO SEU SQUID...\033[0m"
    sleep 3
    echo "\033[0;33m      Sucesso...\033[0m"
-   echo -e "\033[0;36m======================================\033[0m"
+   sleep 1 
+   echo "\033[0;32mCONFIGURANDO SUA VPS...\033[0m"
+   sleep 3
+   echo "\033[0;33m      Sucesso...\033[0m"
+   echo "\033[0;36m======================================\033[0m"
 yum -y update 1> /dev/null 2> /dev/null
 yum install -y squid 1> /dev/null 2> /dev/null
 apt-get update > /dev/null 2> /dev/null
@@ -325,466 +306,275 @@ http_access deny all' >> /etc/squid*/squid.conf
 payloads
 service squid restart 1> /dev/null 2> /dev/null
 service squid3 restart > /dev/null 2> /dev/null
-hostadic
-removerhostd
-echo -e "\033[1;36mPronto!!! Aperte Enter Para Voltar Ao Menu \033[0m"
+
+echo "\033[1;36mPronto!!! Aperte Enter Para Voltar Ao Menu \033[0m"
 read mmmmmmmliojhjhwfg
 }
-function detalhesdosistema(){
-if [ -f /proc/cpuinfo ]
-then
-echo -e "\n\033[1;36mProcessador\033[0m"
-modelo=$(cat /proc/cpuinfo |grep "model name" |uniq |awk -F : {'print $2'})
-cpucores=$(cat /proc/cpuinfo |grep "cpu cores" |uniq |awk -F : {'print $2'})
-cache=$(cat /proc/cpuinfo |grep "cache size" |uniq |awk -F : {'print $2'})
-echo -e "\033[1;36mModelo:\033[0m$modelo"
-echo -e "\033[1;36mNucleos:\033[0m$cpucores"
-echo -e "\033[1;36mMemoria Cache:\033[0m$cache"
-echo -e "\033[1;36mArquitetura: \033[0m$(uname -p)"
-else
-echo -e "\033[1;31mProcessador\033[0m"
-echo "Não foi possivel encontrar /proc/cpuinfo"
-fi
-if [ -f /etc/lsb-release ]
-then
-echo -e "\n\033[1;36mSistema Operacional\033[0m"
-name=$(cat /etc/lsb-release |grep DESCRIPTION |awk -F = {'print $2'})
-codename=$(cat /etc/lsb-release |grep CODENAME |awk -F = {'print $2'})
-echo -e "\033[1;36mNome: \033[0m$name"
-echo -e "\033[1;36mCodeName: \033[0m$codename"
-echo -e "\033[1;36mKernel: \033[0m$(uname -s)"
-echo -e "\033[1;36mKernel Release: \033[0m$(uname -r)"
-if [ -f /etc/os-release ]
-then
-devlike=$(cat /etc/os-release |grep LIKE |awk -F = {'print $2'})
-echo -e "\033[1;36mDerivado do Antecedente OS: \033[0m$devlike"
-fi
-else
-echo -e "\n\033[1;31mSistema Operacional\033[0m"
-echo "Não foi possivel encontrar /etc/lsb-release"
-fi
-if free 1>/dev/null 2>/dev/null
-then
-echo -e "\n\033[1;36mMemoria RAM\033[0m"
-echo -e "\033[1;36mTotal: \033[0m$(free -m |grep -i mem |awk {'print $2'}) MB | $(( $(free -m |grep -i mem |awk {'print $2'}) / 1024 )) GB"
-echo -e "\033[1;36mEm Uso: \033[0m$(free -m |grep -i mem |awk {'print $3'}) MB | $(( $(free -m |grep -i mem |awk {'print $3'}) / 1024 )) GB"
-echo -e "\033[1;36mLivre: \033[0m$(free -m |grep -i mem |awk {'print $4'}) MB | $(( $(free -m |grep -i mem |awk {'print $4'}) / 1024 )) GB"
-echo -e "\n\033[1630mSwap\033[0m"
-echo -e "\033[1;36mTotal: \033[0m$(free -m |grep -i swap |awk {'print $2'}) MB | $(( $(free -m |grep -i swap |awk {'print $2'}) / 1024 )) GB"
-echo -e "\033[1;36mEm Uso: \033[0m$(free -m |grep -i swap |awk {'print $3'}) MB | $(( $(free -m |grep -i swap |awk {'print $3'}) / 1024 )) GB"
-echo -e "\033[1;36mLivre: \033[0m$(free -m |grep -i swap |awk {'print $4'}) MB | $(( $(free -m |grep -i swap |awk {'print $4'}) / 1024 )) GB"
-else
-echo -e "\n\033[1;31mMemoria RAM\033[0m"
-echo "Não foi possivel obter informações sobre a memoria RAM"
-fi
-}
-function monitorar(){
+userd () {
 clear
-   echo "\033[1;31m                 Monitoramento Crazzy                  \033[0m"
-   echo "\033[47;36m         Usuario               Conectados /Limite               \033[0m"
-   echo "\033[1;31m      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \033[0m"
+ 
+if [ $(id -u) -eq 0 ] 
+   then    
+   echo "$f Digite O Ip Da Sua Vps Para Continuar$x" ; read ip
+   clear
+   echo "\033[0;36mQual O Nome Do Novo Usuario?\033[0;37m"; read -p " " name    
+   echo "\033[0;36mSenha Qual A Para O Usuario $name ? $x"; read -p " " pass    
+   echo "\033[0;36mQuantos Dias Usuario $name Deve Durar:\033[0;37m"; read -p " " daysrnf   
+echo "\033[0;36mQuantos Usuarios Iram Se Conectar?$x" ; read -p " " limiteuser 
+   echo "\033[0m"    
+   if cat /etc/passwd |grep $name: |grep -vi [a-z]$name |grep -v [0-9]$name > /dev/null 
+      then     
+      echo "\033[1;31mUsuario $name Ja Existe\033[0m"  
+      else     
+       valid=$(date '+%C%y-%m-%d' -d " +$daysrnf days")         
+       datexp=$(date "+%d/%m/%Y" -d "+ $daysrnf days")      
+       useradd -M -s /bin/false $name -e $valid         
+       (echo $pass; echo $pass)|passwd $name 2>/dev/null    
+limite $name $limiteuser
+clear
+       echo "\033[1;36mIp Ssh: $a $ip $x"         
+       echo "\033[1;36mUsuario Da Ssh: $a $name $x"                
+       echo "\033[1;36mSenha Do Usuario: $a $pass $x"                   
+       echo "\033[1;36mProxy/Porta: $a $ip :80/8080/3128/8799$x"                            
+       echo "\033[1;36mData Que Usuario Ira Expirar: $a $datexp $x"                        
+       echo "\033[0;36mMaximo De Usuarios Conectados: $a $limiteuser $x"         
+       echo "$f Digite Enter Para Voltar Ao Menu $x" ; read hcfh                      
+       echo "$pass" > /etc/Crazzydir/senha/$name     
+        
+   fi
+       else    
+       if echo $(id) |grep sudo > /dev/null 
+       then    
+       echo "\033[0;31m Seu Usuario Esta No Grupo Sudo \033[0;m"   
+       echo "$a Para Tornar-se Root, Digite  \033[1;31mSudo Su\033[0m" 
+       else    
+       echo "$a Voce Nao Esta Como Usuario Root, Nem Com Seus Direitos (sudo)\nPara Virar Root Execute \033[1;31msu\033[0m E Digite Sua Senha Root"    
+        fi
+fi
+ 
+ 
+}
+ 
+excluir () {
+clear
+ 
+   echo "$f Qual o Nome Do Usuario Que Deseja Excluir? $x"
+   read nome
+   userdel --force $nome > /dev/null 2>/dev/null
+   echo "\033[0;36m O Usuario $nome Foi Excluido \033[0m"
+ 
+ 
+}
+ 
+alter () {
+clear
+ 
+ echo "$f Qual O Nome Do Usuario Que Deseja Mudar A Senha $x :"
+ read namer
+ if cat /etc/passwd |grep $namer: > /dev/null
+   then 
+   echo " "
+   else
+   clear
+   echo "$a Usuario $namer Não Existe $x"
+   sleep 3
+   Crazzy
+ fi
+   echo "$f Qual A Nova Senha Do Usuario $namer $x :"
+   read senha
+   (echo "$senha" ; echo "$senha" ) |passwd $namer > /dev/null 2>/dev/null
+   echo "$senha" > /etc/Crazzydir/senha/$namer 
+   echo "$d Senha Modificada Para $senha $x"
+    
+    
+}
+ 
+data () {
+clear
+ 
+echo "$f Qual O Nome Do Usuario Que Voce Quer Mudar A Data De Validade $x :"
+read namers
+ if cat /etc/passwd |grep $namers: > /dev/null
+   then 
+   echo " "
+   else
+   clear
+   echo "$a Usuario $namers Nao Existe $x"
+   sleep 4
+   Crazzy
+ fi
+   clear
+   echo "$f Qual A Nova Data No Formato AAAA/MM/DD $x"
+   read date
+   date chage -E $date $namer 2> /dev/null
+   echo "\033[1;36mUsuario $namers Data: $date\033[0m"
+    
+}
+ 
+mon () {
+ 
+clear
+   echo "$f                 Monitoramento Crazzy                  $x"
+   echo "$f         Usuario               Conectados /Limite               $x"
+   echo " $a      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ $x"
  
    for users in `awk -F : '$3 > 900 { print $1 }' /etc/passwd |sort |grep -v "nobody" |grep -vi polkitd |grep -vi system-` ; do
  
  
-if cat /etc/CrazzyD/limite/$users > /dev/null 2> /dev/null
+if cat /etc/Crazzydir/limite/$users > /dev/null 2> /dev/null
 then
-limitecs=$(cat /etc/CrazzyD/limite/$users)
+limitecs=$(cat /etc/Crazzydir/limite/$users)
 else
 limitecs="null"
 fi
    conectados=$(ps x |grep -vi '[a-z]$users' |grep -vi '$users[a-z]' |grep -v '[1-9]$users' |grep -v '$users[1-9]' |grep $users |grep $users |grep 'sshd:' |grep [priv] |wc -l)     
    tput setaf 6 ; tput bold ; printf      '          %-32s%s\n' $users $conectados/$limitecs; tput sgr0     
-   echo "\033[1;31m      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \033[0m"
+   echo " $a      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ $x"
    done
    echo
-   echo "\033[1;36m Aperte Enter Para Voltar Ao Menu \033[0m" ; read sdgn
+   echo "$f Aperte Enter Para Voltar Ao Menu $x" ; read sdgn
     
-function removerexpirados(){
-clear
-echo -e "         \033[1;36mRemover Usuarios Expirados\033[0m"
-datahoje=$(date +%s)
-for user in $(cat /etc/passwd |grep -v "nobody" |awk -F : '$3 > 900 {print $1}')
-do
-dataexp=$(chage -l $user |grep "Account expires" |awk -F : '{print $2}')
-if [[ $dataexp == ' never' ]]; then
-id > /dev/null 2>/dev/null
-else
-dataexpn=$(date -d"$dataexp" '+%d/%m/%Y')
-dataexpnum=$(date '+%s' -d"$dataexp")
-fi
-if [[ $dataexpnum < $datahoje ]]; then
-printf "\033[1;31m"
-printf '%-41s' $user
-printf "\033[0m"
-echo -e "\033[1;31mUsuario Expirado Foi Deletado\033[0m"
-kill $(ps -u $user |awk '{print $1}') >/dev/null 2>/dev/null ; userdel $user
-else
-printf "\033[1;32m"
-printf '%-41s' $user
-printf "\033[0m"
-echo $dataexpn
-fi
-done
-echo -e "\033[1;36mAperte Enter Para Voltar Ao Menu\033[0m"
-read ealsldc
+ 
 }
-function criarusuarioteste(){
-mkdir /etc/usuariosteste 1>/dev/null 2>/dev/null
-echo -e "   Usuarios teste"
-for testus in $(ls /etc/usuariosteste |sort |sed 's/.sh//g')
-do
-echo "$testus"
-done
-printf "\n"
-printf "Nome Do Usuario Teste: "; read nome
-printf "Senha Do Usuario Teste: "; read pass
-echo -e "\nUse s = Segundos, m = Minutos, h = Horas e d = dias EX: 10m ."
-printf "Quanto Tempo o Usuario $nome Deve Durar: ";read tempoin
-tempo=$(echo "$tempoin" |sed 's/ //g')
-useradd -M -s /bin/false $nome
-(echo $pass;echo $pass) |passwd $nome 1>/dev/null 2>/dev/null
-echo "#!/bin/bash
-sleep $tempo
-kill"' $(ps -u '"$nome |awk '{print"' $1'"}') 1>/dev/null 2>/dev/null
-userdel --force $nome
-rm -rf /etc/usuariosteste/$nome.sh
-exit" > /etc/usuariosteste/$nome.sh
-echo -e "Usuario: $nome
-Senha: $pass
-Validade: $tempo\n
-Quando o Usuario Expirar, Todos Serao Desconectados e o User Sera Deletado."
-bash /etc/usuariosteste/$nome.sh &
-exit
-}
-function badvpn_install(){
-wget https://raw.githubusercontent.com/RicKbrL/VpsConf/master/badvpn.sh && bash badvpn.sh
-}
-function removerlimite(){
-echo -ne "\033[1;32mQual Que Quer Tirar o Limite: \033[0m"
-read user
-cronsemuser=$(cat /etc/crontab |grep -v "#$user#")
-echo "$cronsemuser" > /etc/crontab
-rm -rf /etc/CrazzyD/limite/$user 2>/dev/null
-rm -rf /etc/CrazzyD/limite/$user.sh 2>/dev/null
-pids=$(ps x |grep "#$user#" |awk {'print $1'})
-kill $pids 2>/dev/null
-kill "$pids" 2>/dev/null
-kill -9 `ps x |grep "#$user#" |awk {'print $1'}` 2>/dev/null
-kill `ps x |grep "#$user#" |awk {'print $1'}` 2>/dev/null
-echo -e "\033[1;37mUsuario: $user, Limite Removido\033[0m"
-}
-function backup_de_usuarios(){
-clear
-echo -e "\033[1;37mFazendo Backup de Usuarios...\033[0m"
-for user in `awk -F : '$3 > 900 { print $1 }' /etc/passwd |grep -v "nobody" |grep -vi polkitd |grep -vi systemd-[a-z] |grep -vi systemd-[0-9]`
-do
-if [ -e /etc/CrazzyD/senha/$user ]
-then
-pass=$(cat /etc/CrazzyD/senha/$user)
-else
-echo -e "\033[1;31mNão Foi Fossivel Ter a Senha do Usuario\033[1;37m ($user)"
-read -p "Digite a Senha Manualmente ou Tecle ENTER: " pass
-fi
-
-if [ -e /etc/CrazzyD/limite/$user ]
-then
-limite=$(cat /etc/CrazzyD/limite/$user)
-echo "$user:$pass:$limite" >> /etc/CrazzyD/backup
-echo -e "\033[1;37mUser $user Backup [\033[1;31mOK\033[1;37m]\033[0m"
-else
-echo "$user:$pass" >> /etc/CrazzyD/backup
-echo -e "\033[1;37mUser $user Backup [\033[1;31mOK\033[1;37m]\033[0m"
-fi
-done
-echo " "
-echo -e "\033[1;31mBackup Completo !!!\033[0m"
-echo " "
-echo -e "\033[1;37mAs Informações Sobre o Usuarios Ficam No Arquivo \033[1;31m /etc/CrazzyD/backup \033[1;37m
-Guarde os Para Uma Futura Restauração\033[0m"
-}
-function mudarnome(){
-printf "Qual Usuario Deseja Mudar o Nome?: "; read user
-if cat /etc/passwd |grep $user: >/dev/null 2>/dev/null
-then
-printf ""
-else
-echo "Usuario Não Existe"
-exit
-fi
-printf "Novo Nome Para o Usuario $user: "; read nome
-usermod -l $nome $user 1>/dev/null 2>/dev/null
-echo -e "\nUsuario: $user, Novo Nome: $nome."
-exit
-}
-function firewallblock(){
-read -p "Digite o Ip da Vps: " ip
-echo Configurando...
-sleep 1
-iptables -P INPUT DROP
-iptables -P OUTPUT DROP
-iptables -P FORWARD DROP
-iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
-iptables -A OUTPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
-iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
-iptables -t filter -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
-iptables -A OUTPUT -p tcp -d $ip --dport 443 -m state --state NEW -j ACCEPT
-iptables -A OUTPUT -p tcp -d $ip --dport 80 -m state --state NEW -j ACCEPT
-iptables -A OUTPUT -p tcp --dport 53 -m state --state NEW -j ACCEPT
-iptables -A OUTPUT -p udp --dport 53 -m state --state NEW -j ACCEPT
-iptables -A OUTPUT -p tcp --dport 67 -m state --state NEW -j ACCEPT
-iptables -A OUTPUT -p udp --dport 67 -m state --state NEW -j ACCEPT
-iptables -A INPUT -p tcp --dport 22 -j ACCEPT
-iptables -A INPUT -p tcp --dport 443 -j ACCEPT
-iptables -A OUTPUT -p tcp --dport 22 -j ACCEPT
-iptables -A OUTPUT -p tcp --dport 443 -j ACCEPT
-iptables -A INPUT -p tcp --dport 8080 -j ACCEPT
-iptables -A INPUT -p tcp --dport 80 -j ACCEPT
-iptables -A INPUT -p tcp --dport 3128 -j ACCEPT
-iptables -A INPUT -p tcp --dport 8799 -j ACCEPT
-iptables -A OUTPUT -p tcp --dport 8080 -j ACCEPT
-iptables -A OUTPUT -p tcp --dport 80 -j ACCEPT
-iptables -A OUTPUT -p tcp --dport 3128 -j ACCEPT
-iptables -A OUTPUT -p tcp --dport 8799 -j ACCEPT
-iptables -A FORWARD -p tcp --dport 8080 -j ACCEPT
-iptables -A FORWARD -p tcp --dport 80 -j ACCEPT
-iptables -A FORWARD -p tcp --dport 3128 -j ACCEPT
-iptables -A FORWARD -p tcp --dport 8799 -j ACCEPT
-iptables -A INPUT -p icmp --icmp-type echo-request -j DROP
-iptables -A INPUT -p tcp --dport 10000 -j ACCEPT
-iptables -A OUTPUT -p tcp --dport 10000 -j ACCEPT
-echo -e "\033[1;36mFirewall modificado
-Torrent Bloqueado\033[0m"
-}
-function resetfirewall(){
-iptables -F
-iptables -X
-iptables -t mangle -F
-iptables -t mangle -X
-iptables -t nat -F
-iptables -t nat -X
-iptables -t filter -F
-iptables -t filter -X
-echo "Regras resetadas"
-}
-function detalhes_usuarios(){
-clear
-
-echo -e "\033[1;31m----------------------------------------------------------------------\033[0m"
-echo -e "\033[1;36m Usuario               Senha               Data E.          Logins S. \033[0m"
-echo -e "\033[1;31m----------------------------------------------------------------------\033[0m"
-for users in `awk -F : '$3 > 900 { print $1 }' /etc/passwd |sort |grep -v "nobody" |grep -vi polkitd |grep -vi system-`
-do
-
-if cat /etc/CrazzyD/limite/$users > /dev/null 2> /dev/null
-then
-limitecs=$(cat /etc/CrazzyD/limite/$users)
-else
-limitecs="null"
-fi
-
-if  senha=$(cat /etc/CrazzyD/senha/$users > /dev/null 2> /dev/null)
-then
-senha=$(cat /etc/CrazzyD/senha/$users)
-else
-senha="null"
-fi
-
-data=$(chage -l $users |grep -i co |awk -F : '{print $2}')
-if [ $data = never ] 2> /dev/null
-then
-date="Nunca"
-fi
-detalhesdata=$(printf '%-18s' "$data")
-detalheslimit=$(printf '%-10s' "$limitecs")
-detalhes=$(printf ' %-21s' "$users")
-detalhespass=$(printf '%-18s' "$senha")
-echo -e "\033[1;36m$detalhes $detalhespass $detalhesdata $detalheslimit\033[0m"
-echo -e "\033[1;31m----------------------------------------------------------------------\033[0m"
-done
-}
-function restaurar_usuarios(){
-echo -n "Digite o Diretorio Do Arquivo Backup: "
-read arq
-echo -e "\033[1;36mRestaurando Usuarios...\033[0m"
-
-for user in `cat $arq`
-do
-usuario=$(echo "$user" |awk -F : '{print $1}')
-senha=$(echo "$user" |awk -F : '{print $2}')
-if cat /etc/passwd |grep $usuario: 1> /dev/null 2>/dev/null
-then
-echo " " > /dev/null
-else
-echo "$user" |cut -d: -f3 1> /dev/null 2>/dev/null
-  if [ $? = 0 ]
-  then
-  limite=$(echo "$user" |awk -F : '{print $3}')
-  useradd -M -s /bin/false $usuario
-  (echo $senha ; echo $senha) | passwd $usuario > /dev/null 2> /dev/null
-  limit $usuario $limite 1> /dev/null 2> /dev/null
-  echo "$senha" > /etc/gerenciadorinfo/senha/$usuario
-  else
-  useradd -M -s /bin/false $usuario
-  (echo $senha ; echo $senha) | passwd $usuario > /dev/null 2> /dev/null
-  echo "$senha" > /etc/gerenciadorinfo/senha/$usuario
-  fi
-  echo -e "\033[1;37mUsuario: \033[1;31m$usuario \033[1;37mBackup: [\033[1;31mOk\033[1;37m]\033[0m"
-fi
-done
-}
-function banner(){
+ 
+banner () {
 clear
 cd /etc/ssh* 
     
 if [ -f /etc/ssh/banner.txt ]
-then    
-banner=$(cat /etc/ssh/banner.txt)    
- 
+then
+echo "$a"      
+banner=$(cat /etc/ssh/banner.txt)   
 else
 banner="Não há um banner no momento"
 fi       
-   echo -e "\033[1;36mBanner atual\n\n\033[1;31m$banner\n\033[0m"
-   echo -e "\033[1;36m Qual A Mensagem Que Voce Quer Por No Banner? \033[0m"
+   echo "\033[1;36mBanner atual\n\n\033[1;31m$banner\n\033[0m"
+   echo "$f Qual A Mensagem Que Voce Quer Por No Banner? $x"
    read texto 
    echo "$texto" > banner.txt 
-   echo  "Banner /etc/ssh/banner.txt" >> sshd_config 
+   echo "Banner /etc/ssh/banner.txt" >> sshd_config 
    service sshd restart > /dev/null 2> /dev/null
    service ssh restart > /dev/null 2> /dev/null
-   echo -e \033[1;36m Banner Adicionado Com Sucesso $x"
+   echo "$f Banner Adicionado Com Sucesso $x"
    sleep 2
-   echo -e "$f Aperte Enter Para voltar Ao Menu \033[0m" ; read ksksvc
+   echo "$f Aperte Enter Para voltar Ao Menu $x" ; read ksksvc
+    
+ 
 }
-function deletar_todos(){
-for user in $(cat /etc/passwd |awk -F : '$3 > 900 {print $1}' |grep -v "rick" |grep -vi "nobody")
-do
-userpid=$(ps -u $user |awk {'print $1'})
-kill "$userpid" 2>/dev/null
-userdel $user
-echo "$user Deletado"
-echo -e "\033[1;36mAperte Enter Para Voltar Ao Menu\033[0m"
-read jhgft
-done
-}
+ 
+addhost () {
 clear
-if [[ $1 == "" ]]
-then
-echo -e "\033[1;37m       VpsPack V2 © RicKUX \033[0m"
-echo -e "\033[1;37mEscolha uma opção:    Para Sair Ctrl + C\033[1;33m
-[\033[1;30m01\033[1;33m] Configurar Vps\033[1;33m
-[\033[1;30m02\033[1;33m] Criar Usuario\033[1;33m
-[\033[1;30m03\033[1;33m] Criar Usuarios Para Teste\033[1;33m
-[\033[1;30m04\033[1;33m] Redefinir Usuarios\033[1;33m
-[\033[1;30m05\033[1;33m] Deletar Usuario\033[1;33m
-[\033[1;30m06\033[1;33m] Deletar Todos Os Usuarios\033[1;33m
-[\033[1;30m07\033[1;33m] Detalhes De Usuarios\033[1;33m
-[\033[1;30m08\033[1;33m] Monitorar Usuarios\033[1;33m
-[\033[1;30m09\033[1;33m] Mudar Nome De Usuario\033[1;33m
-[\033[1;30m10\033[1;33m] Alterar Limite De Conexoes\033[1;33m
-[\033[1;30m11\033[1;33m] Remover Limite De Conexoes\033[1;33m
-[\033[1;30m12\033[1;33m] Fazer Backup De Usuarios\033[1;33m
-[\033[1;30m13\033[1;33m] Restaurar Backup De Usuarios\033[1;33m
-[\033[1;30m14\033[1;33m] Banner\033[1;33m
-[\033[1;30m15\033[1;33m] Bloquear Torrent\033[1;33m
-[\033[1;30m16\033[1;33m] Desbloquear Torrent\033[1;33m
-[\033[1;30m17\033[1;33m] Adicionar Host\033[1;33m
-[\033[1;30m18\033[1;33m] Remover Host\033[1;33m
-[\033[1;30m19\033[1;33m] Instalar BadVPN\033[1;33m
-[\033[1;30m20\033[1;33m] Iniciar BadVPN\033[1;33m
-[\033[1;30m21\033[1;33m] Parar BadVPN\033[1;33m
-[\033[1;30m22\033[1;33m] Testar a Velocidade\033[1;33m
-[\033[1;30m23\033[1;33m] Detalhes Do Seu Sistema\033[1;33m
-[\033[1;30m24\033[1;33m] Desinstalar o Crazzy Script\033[1;33m"
-read -p ": " opcao
-else
-opcao=$1
-fi
-case $opcao in
-  1 | 01 )
-   squidconf;;
-  2 | 02 )
-   criarusuario
-   Crazzy;;
-  3 | 03 )
-   criarusuarioteste
-   Crazzy;;
-  4 | 04 )
-   redefinirusuario
-   Crazzy;;
-  5 | 05 )
-   deletarusuario
-   Crazzy;;
-  6 | 06 )
-   deletar_todos
-   Crazzy;;
-  7 | 07 )
-   detalhes_usuarios
-   Crazzy;;
-  8 | 08 )
-   monitorar
-   Crazzy;;
-  9 | 09 )
-   mudarnome
-   Crazzy;;
-  10)
-   read -p "Usuario: " user
-   read -p "Limite: " limite
-   limite $user $limite;;
-   Crazzy;; 
-  11)
-   removerlimite
-   Crazzy;;
-  12)
-   backup_de_usuarios
-   Crazzy;;
-  13)
-   restaurar_usuarios
-   Crazzy;;
-  14)
+echo "$a"
+cat /etc/payloads
+echo "$f Qual Host Deseja Adicionar? $x"
+read hostt
+ 
+echo "$hostt" >> /etc/payloads
+squid -k reconfigure > /dev/null 2> /dev/null
+squid3 -k reconfigure > /dev/null 2> /dev/null
+echo
+echo "$f Host $a $hostt $f Adicionada Com Sucesso!!! $x"
+ 
+}
+ 
+detalhes () {
+clear
+ 
+script="$a CrazzyScript $x"
+dono="$a MatheusR $x"
+versao="$a V1.0 $x"
+data="$a 10/04/2017 $x"
+ 
+echo "$f Nome Do Script: $script"
+echo "$f Versão: $versao"
+echo "$f Desenvolvido Por: $dono"
+echo "$f Data De Criação: $data"
+ 
+}
+ 
+ 
+#menu
+echo "$f"
+figlet crazzy
+echo "\033[0;31m------------------------------------------------- $x"
+echo "\033[1;36mBem Vindo Ao Menu De Opções Do CrazzyScript,
+Toda Vez Que Quizer Entra No Menu, Digite \033[2;31mCrazzy \033[0m"
+echo
+echo "\033[1;31m
+[$f 0$a ] $f  Sair Do Menu $a
+[$f 1$a ] \033[1;36m  Configurar Sua Vps \033[1;31m
+[$f 2$a ] \033[1;36m  Criar Usuarios \033[1;31m
+[$f 3$a ] \033[1;36m  Deletar Usuarios \033[1;31m
+[$f 4$a ] \033[1;36m  Mudar Senha De Usuario \033[1;31m
+[$f 5$a ] \033[1;36m  Mudar Data De Validade \033[1;31m
+[$f 6$a ] \033[1;36m  Monitorar Usuarios \033[1;31m
+[$f 7$a ] \033[1;36m  Banner $a
+[$f 8$a ] $f  Adicionar Host $a
+[$f 9$a ] $f  Detalhes Do Script $a
+[$f 10$a ] $f Atualizar o CrazzyScript $a  
+[$f 11$a ] $f Desinstalar o CrazzyScript $x"        
+echo "\033[0;31m------------------------------------------------- $x"
+echo   
+echo "$a Escolha Uma Opção"
+read -p ":" menu
+  
+echo
+case $menu in
+ 
+0)
+exit; ;;
+1)
+   squidconf
+   Crazzy; ;;
+2)
+   userd
+   sleep 4
+   Crazzy; ;;
+3)
+   excluir
+   sleep 10
+   Crazzy; ;;
+4)
+   alter
+   sleep 10
+   Crazzy; ;;
+5)
+   data
+   sleep 10
+   Crazzy; ;;
+6)
+   mon
+   sleep 10
+   Crazzy; ;;
+7) 
    banner
-   Crazzy;;
-  15)
-   firewallblock
-   Crazzy;;
-  16)
-   resetfirewall
-   Crazzy;;
-  17)
+   sleep 10
+   Crazzy; ;;
+8)
    addhost
-   Crazzy;;
-  18)
-   removerhost
-   Crazzy;;
-  19)
-   badvpn_install
-   echo -e "\033[1;36mVoltando Ao Menu...\033[0m"
-   sleep 5
-   Crazzy;;
-  20)
-   badvpn start
-   echo -e "\033[1;36mVoltando Ao Menu...\033[0m"
-   sleep 5
-   Crazzy;;
-  21)
-   badvpn stop
-   echo -e "\033[1;36mVoltando Ao Menu...\033[0m"
-   sleep 5
-   Crazzy;;
-  22)
-   speedtest.py
-   echo -e "\033[1;36mAperte Enter Para Voltar Ao Menu...\033[0m"
-   read eeeee
-   Crazzy;;
-  23)
-   detalhesdosistema
-   echo -e "\033[1;36mAperte Enter Para Voltar Ao Menu...\033[0m"
-   read eeeeerrr
-   Crazzy;;
-  24)
-   rm -rf /bin/speedtest.py 2>/dev/null
-   rm -rf /bin/deletarusuario 2>/dev/null
-   rm -rf /bin/redefinirusuario 2>/dev/null
-   rm -rf /bin/limite 2>/dev/null
-   rm -rf /bin/criarusuario 2>/dev/null
-   rm -rf /bin/Crazzy 2>/dev/null;;
+   sleep 10
+   Crazzy; ;;
+9)
+   detalhes
+   sleep 10
+   Crazzy; ;;
+10)
+   wget -O --no-check-certificate /bin/atualizacao https://www.dropbox.com/s/g2s4ky5ckg366zm/att.sh
+   chmod a+x /bin/atualizacao
+   atualizacao; ;;
+11)
+   rm -rf /bin/Crazzy > /dev/null 2> /dev/null
+   echo "$f Script Desinstalado Com Sucesso $x"
+   echo "$f Caso Queira Instala-lo Novamente, Digite $a instalador $x"
+   sleep 1; ;;
+12)
+   detalhesuser
+   sleep 10
+   Crazzy; ;;
+    
+*)
+   echo "$a Opcao Invalida $x"
+   sleep 2
+   Crazzy; ;;
+ 
 esac
