@@ -11,65 +11,7 @@ e="\033[1;35m"
 f="\033[1;36m"
 g="\033[1;41m"
  
- squidconf () {
-clear
-cat -n /etc/issue |grep 1 |cut -d' ' -f6,7,8 |sed 's/1//' |sed 's/	//' > /etc/so 
-if [ -f /etc/lsb-release ]
-then
-sistema=$(cat /etc/lsb-release |grep "DISTRIB_DESCRIPTION" | awk -F = '{print $2}' |sed 's/"//g')
-else
-sistema=Null
-fi
-echo "\033[1;36mPara Configurar Digite o ip Da Sua Vps !\033[0m"
-Digite o ip !\033[0m"
-read -p ": " ip
-clear
-   echo "\033[0;36m====================================================\033[0m"
-   echo "\033[0;31mDesenvolvedor Do Script:\033[0;36m@MatheusR\033[0m"
-   echo "\033[0;31mSeu Sistema Operacional: $f $sistema\033[0m"
-   echo "\033[0;31mIp Da Sua VPS:\033[0;36m $ip\033[0m"
-   echo "\033[0;31mSeu Squid Esta Configurado Para Operar Nas Portas:\033[0;36m80, 8080, 3128, 8799\033[0m"
-   echo "\033[0;31mDropbear Nas Portas:\033[0;36m22 e 443\033[0m"
-   echo "\033[0;31mVoce Tambem Pode Usa O Ip\033[0;33m127.0.0.1\033[0;31mComo Ip SSH\033[0m"
-   echo "\033[0;36m=====================================================\033[0m"
-}
-sshd_config () { 
-echo 'Port 443
-PermitRootLogin yes
-PubkeyAuthentication yes
-PasswordAuthentication yes
-' >> /etc/ssh/sshd_config
-}
 
-hostadic () { 
-echo '#!/bin/bash
-echo "\033[1;31mHost Atuais\n\n\033[1;32m$(cat /etc/payloads)\n\033[0m"
-echo"\033[1;36mQual Host Deseja Adicionar ?\033[0m"
-read -p ": " host
-echo "$host" >> /etc/payloads
-squid -k reconfigure > /dev/null 2> /dev/null
-squid3 -k reconfigure > /dev/null 2> /dev/null
-echo "\033[0;36m$host Adicionado Com Sucesso!!!\033[0m" ' > /bin/addhosta
-chmod a+x /bin/addhosta
-}
-removerhostd () { 
-echo '#!/bin/bash
-echo "\033[1;31mHosts Atuais\n\n\033[1;32m$(cat /etc/payloads)\n\033[0m"
-echo "\033[1;36mQual Host Deseja Remover: \033[0m"
-read host
-hosts = $(cat /etc/payloads |grep -v $host)
-echo "$hosts" > /etc/payloads
-squid -k reconfigure >/dev/null 2>/dev/null
-squid3 -k reconfigure >/dev/null 2>/dev/null
-echo "\n\033[1;31mHost Removido\033[0m"
-' > /bin/removerhost
-}
-payloads () { 
-echo ".claro.com.br
-.claro.com.sv
-.vivo.com.br
-.ddivulga.com" > /etc/payloads
-}
 
 userd () {
 clear
@@ -112,8 +54,6 @@ echo "\033[0;36mQuantos Usuarios Iram Se Conectar?$x" ; read -p " " limiteuser
        echo "$a Voce Nao Esta Como Usuario Root, Nem Com Seus Direitos (sudo)\nPara Virar Root Execute \033[1;31msu\033[0m E Digite Sua Senha Root"    
        fi
 fi
- 
- 
 }
  
 excluir () {
@@ -146,8 +86,6 @@ clear
    (echo "$senha" ; echo "$senha" ) |passwd $namer > /dev/null 2>/dev/null
    echo "$senha" > /etc/Crazzydir/senha/$namer 
    echo "$d Senha Modificada Para $senha $x"
-    
-    
 }
  
 data () {
